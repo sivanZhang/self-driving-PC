@@ -25,68 +25,6 @@
             }
         },
         {
-            "path" : "pages/userCenter/PropertyList",
-            "style" : {
-                "navigationBarTitleText" : "Reset Password",
-                "app-plus" : {
-                    "titleNView" : {
-                        "buttons" : [
-                            {
-                                "type" : "home",
-                                "width" : "auto"
-                            }
-                        ]
-                    }
-                }
-            }
-        },
-        {
-            "path" : "pages/Parking/ReserveParkingSpot",
-            "style" : {
-                "navigationBarTitleText" : "Reserve Parking Spot",
-                "app-plus" : {
-                    "titleNView" : {
-                        "buttons" : [
-                            {
-                                "type" : "home",
-                                "width" : "auto",
-                                "float" : "left"
-                            },
-                            {
-                                "text" : "\ue62c",
-                                "fontSize" : "17",
-                                "fontSrc" : "/static/font/iconfont.ttf",
-                                "width" : "auto"
-                            }
-                        ]
-                    }
-                }
-            }
-        },
-        {
-            "path" : "pages/repair/RequestRepair",
-            "style" : {
-                "navigationBarTitleText" : "Request",
-                "app-plus" : {
-                    "titleNView" : {
-                        "buttons" : [
-                            {
-                                "type" : "home",
-                                "width" : "auto",
-                                "float" : "left"
-                            },
-                            {
-                                "text" : "\ue62c",
-                                "fontSize" : "18",
-                                "fontSrc" : "/static/font/iconfont.ttf",
-                                "width" : "auto"
-                            }
-                        ]
-                    }
-                }
-            }
-        },
-        {
             "path" : "pages/userCenter/Settings",
             "style" : {
                 "navigationBarTitleText" : "Settings",
@@ -125,23 +63,6 @@
             }
         },
         {
-            "path" : "pages/contact/details",
-            "style" : {
-                "navigationBarTitleText" : "Contact Details",
-                "app-plus" : {
-                    "titleNView" : {
-                        "buttons" : [
-                            {
-                                "type" : "home",
-                                "width" : "auto"
-                            }
-                        ]
-                    }
-                }
-            }
-        }
-		,
-        {
             "path" : "pages/notifications/Notifications",
             "style" : {
                 "navigationBarTitleText" : "Notifications",
@@ -172,68 +93,6 @@
                     }
                 }
             }
-        },
-        {
-            "path" : "pages/userCenter/RequestList",
-            "style" : {
-                "navigationBarTitleText" : "My Request",
-                "app-plus" : {
-                    "pullToRefresh" : {
-                        "support" : true
-                    },
-                    "titleNView" : {
-                        "buttons" : [
-                            {
-                                "type" : "home",
-                                "width" : "auto",
-                                "float" : "left"
-                            },
-                            {
-                                "text" : "\ue619 ",
-                                "fontSize" : "17",
-                                "fontSrc" : "/static/font/iconfont.ttf",
-                                "width" : "auto"
-                            }
-                        ]
-                    }
-                }
-            }
-        },
-        {
-            "path" : "pages/Parking/ParkingDetail",
-            "style" : {
-                "navigationBarTitleText" : "Details",
-                "app-plus" : {
-                    "titleNView" : {
-                        "buttons" : [
-                            {
-                                "type" : "home",
-                                "width" : "auto"
-                            }
-                        ]
-                    }
-                }
-            }
-        },
-        {
-            "path" : "pages/repair/RepairDetail",
-            "style" : {
-                "navigationBarTitleText" : "Details",
-                "app-plus" : {
-                    "titleNView" : {
-                        "buttons" : [
-                            {
-                                "type" : "home",
-                                "width" : "auto"
-                            }
-                        ]
-                    }
-                }
-            }
-        },
-        {
-            "path" : "pages/soket",
-            "style" : {}
         }
     ],
     "globalStyle" : {

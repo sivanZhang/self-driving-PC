@@ -15,54 +15,6 @@
 					</template>
 				</view>
 			</view>
-			<view class="main-nav">
-				<view @tap="$url('/pages/repair/RequestRepair')">
-					<view class="icons-bg">
-						<image class="icons-bg-icon" src="/static/icons/yy.png" mode="aspectFit"></image>
-					</view>
-					<view class="main-nav-name">Request</view>
-				</view>
-				<view @tap="$url('/pages/soket')">
-					<!-- bill -->
-					<view class="icons-bg">
-						<image class="icons-bg-icon" src="/static/icons/Bitmap.png" mode="aspectFit"></image>
-					</view>
-					<view class="main-nav-name">Pay bills</view>
-				</view>
-				<view>
-					<view class="icons-bg">
-						<image class="icons-bg-icon" src="/static/icons/barbecue.png" mode="aspectFit"></image>
-					</view>
-					<view class="main-nav-name">Reserve Amennity</view>
-				</view>
-			</view>
-		</view>
-		<view class="subnav">
-			<view @tap="$url('/pages/Parking/ReserveParkingSpot')">
-				<view class="image-warp">
-					<image src="/static/icons/parked-car.png" style="width:64.583upx;height: 47.916upx" @tap="uni.$navigateTo({ url: '/Parking/ReserveParkingSpot' })"></image>
-				</view>
-				<view class="tag-p">Reseve</view>
-				<view class="tag-p">Parking Spot</view>
-			</view>
-			<view>
-				<view class="image-warp">
-					<image src="/static/icons/parcel.png" style="width:58.333upx;height: 45.833upx"></image>
-				</view>
-				<view class="tag-p">Parcel</view>
-			</view>
-			<view>
-				<view class="image-warp">
-					<image src="/static/icons/market.png" style="width:58.333upx;height: 45.833upx"></image>
-				</view>
-				<view class="tag-p">Market</view>
-			</view>
-			<view>
-				<view class="image-warp">
-					<image src="/static/icons/event.png" style="width:52.083upx;height:52.083upx;"></image>
-				</view>
-				<view class="tag-p">Events</view>
-			</view>
 		</view>
 		<view class="main">
 			<view class="mask">
@@ -78,9 +30,6 @@
 					<uni-icon type="arrowright" size="18" style="color: #c8c8c8;"></uni-icon>
 				</view>
 				<view v-else class="right">No news</view>
-			</view>
-			<view class="home-pic">
-				<image src="/static/image/home.png" mode="aspectFill"></image>
 			</view>
 			<view class="user">
 				<image @tap="target('/pages/userCenter/MyAccount')" src="/static/icons/user.png"></image>
@@ -153,17 +102,6 @@
 				}
 			}
 
-			.home-pic {
-				text-align: center;
-				margin-top: 31.25upx;
-
-				image {
-					height: 270.833upx;
-					width: 100%;
-					border-radius: 10.416upx;
-				}
-			}
-
 			.mask {
 				display: flex;
 				align-items: center;
@@ -195,11 +133,6 @@
 					font-size: 25upx;
 					line-height: 1.4;
 
-					.tag-p {
-						color: #e96f6c;
-						font-size: 25upx;
-					}
-
 					image {
 						height: 37.5upx;
 						width: 37.5upx;
@@ -208,84 +141,17 @@
 			}
 		}
 
-		.subnav {
-			height: 147.916upx;
-			color: #fab701;
-			display: flex;
-			justify-content: space-around;
-			box-shadow: 0 6.25upx 6.25upx rgba(200, 200, 204, 0.8);
-			align-items: baseline;
-			padding-top: 20.833upx;
-
-			.tag-p {
-				font-size: 20.833upx;
-				line-height: 1;
-				text-align: center;
-			}
-
-			.image-warp {
-				height: 54.166upx;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-
-				&>image {
-					margin-bottom: 8.333upx;
-				}
-			}
-		}
-
 		.header {
 			position: relative;
 			height: 468.75upx;
-			background: #ddd url('~@/static/image/h4.jpg') no-repeat center center;
+			background: #ddd;
+			/* url('~@/static/image/h4.jpg') */
 			background-size: cover;
 			color: #fff;
 			padding-top: 58.333upx;
-			border-bottom-right-radius: 50% 13%;
-			border-bottom-left-radius: 50% 13%;
 
 			.main {
 				padding: 25upx;
-			}
-
-			.main-nav {
-				margin-top: 62.5upx;
-				display: flex;
-				justify-content: space-around;
-
-				view {
-					text-align: center;
-
-					.main-nav-name {
-						height: 50upx;
-						text-align: center;
-						margin-top: 5.833upx;
-						word-wrap: break-word;
-						max-width: 132.708upx;
-						font-size: 22.916upx;
-						line-height: 20.833upx;
-
-						&:last-child {
-							line-height: 25upx;
-						}
-					}
-				}
-
-				.icons-bg {
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					background: #fff;
-					border-radius: 50%;
-					height: 132.708upx;
-					width: 132.708upx;
-
-					image {
-						max-width: 71.666upx;
-						max-height: 71.666upx;
-					}
-				}
 			}
 
 			.title {

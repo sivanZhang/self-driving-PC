@@ -83,7 +83,7 @@
 			target_detail(data) {
 				this.isRead(data.pk);
 				if (data.fields.category == 0) {
-					this.$url(`/pages/repair/RepairDetail?id=${data.fields.task_id}`)
+					// this.$url(`/pages/repair/RepairDetail?id=${data.fields.task_id}`)
 				} else if (data.fields.category == 1) {
 					this.$url(`/pages/Parking/ParkingDetail?id=${data.fields.task_id}`)
 				} else if (data.fields.category == 2) {

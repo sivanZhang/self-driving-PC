@@ -16,15 +16,6 @@ export default {
     setPortrait(state, str) {
         state.portrait = str;
     },
-    setProperty(state, arr) {
-        state.Property = arr.concat();
-    },
-    setTotal(state, number) {
-        state.Total = number;
-    },
-    setListType(state, str) {
-        state.ListType = str;
-    },
     setUserId(state, num) {
         state.userId = num;
         if (num) {

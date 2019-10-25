@@ -1,7 +1,7 @@
 {
-    "name" : "EstateApp2.1.1",
-    "appid" : "__UNI__9B226C7",
-    "description" : "物业管理",
+    "name" : "self-driving-app",
+    "appid" : "__UNI__1B259BD",
+    "description" : "自驾游app",
     "transformPx" : false,
     "icons" : [
         {
@@ -9,7 +9,7 @@
             "src" : "图片路径"
         }
     ],
-    "versionName" : "1.0.2",
+    "versionName" : "1.0.0",
     "versionCode" : 103,
     "app-plus" : {
         "usingComponents" : true,

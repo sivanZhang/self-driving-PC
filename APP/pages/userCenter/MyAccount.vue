@@ -3,7 +3,7 @@
 		<view class="card">
 			<image src="/static/image/touxiang.png"></image>
 			<view class="main-nav">
-				<view @tap="target('/pages/userCenter/PropertyList')">
+				<view>
 					<view>
 						My
 					</view>
@@ -26,24 +26,6 @@
 					<view>Information</view>
 					<uni-icon type="arrowright" style="color: #ffffff;"></uni-icon>
 				</view>
-			</view>
-		</view>
-		<view class="section" @tap="target('/pages/userCenter/RequestList')">
-			<view>
-				<image class="icon" src="/static/icons/request.png"></image>
-				My Requests
-			</view>
-			<view>
-				<uni-icon type="arrowright"></uni-icon>
-			</view>
-		</view>
-		<view class="section" @tap="target('/pages/contact/details')">
-			<view>
-				<image class="icon" src="/static/icons/post.png"></image>
-				Contact details
-			</view>
-			<view>
-				<uni-icon type="arrowright"></uni-icon>
 			</view>
 		</view>
 		<view class="section" @tap="target('/pages/notifications/Notifications')">
