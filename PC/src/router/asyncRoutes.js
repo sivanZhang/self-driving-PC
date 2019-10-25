@@ -5,7 +5,8 @@
  */
 import Layout from '@/layout'
 export default function asyncRoutes(params) {
-  return [{
+  return [
+    {
       path: '/',
       component: Layout,
       redirect: {
@@ -20,43 +21,12 @@ export default function asyncRoutes(params) {
           path: 'home-page',
           name: 'home-page',
           component: () =>
-            import('@/views/overview/home-page'),
+            import('@/views/home-page'),
           meta: {
             title: '个人首页',
             icon: 'home'
           }
         },
-      ]
-    }, , {
-      path: '/overview',
-      component: Layout,
-      redirect: {
-        name: 'home-page'
-      },
-      meta: {
-        title: '概览',
-        icon: 'gailan'
-      },
-      children: [ {
-          path: 'project',
-          name: 'overview-project',
-          component: () =>
-            import('@/views/overview/project'),
-          meta: {
-            title: '项目概览',
-            icon: 'tree'
-          }
-        },
-        {
-          path: 'training',
-          name: 'overview-training',
-          component: () =>
-            import('@/views/training/training-project'),
-          meta: {
-            title: '实训项目',
-            icon: 'tree2'
-          },
-        }
       ]
     },
     {
@@ -136,25 +106,6 @@ export default function asyncRoutes(params) {
         meta: {
           title: '我的作品',
           icon: 'pd'
-        }
-      }]
-    },
-    {
-      path: '/mine',
-      component: Layout,
-      redirect: 'noRedirect',
-      meta: {
-        title: '我的工作台',
-        icon: 'task'
-      },
-      children: [{
-        path: 'man-hour',
-        name: 'man-hour',
-        component: () =>
-          import('@/views/man-hour'),
-        meta: {
-          title: '我的工时',
-          icon: 'fs'
         }
       }]
     },
@@ -273,74 +224,6 @@ export default function asyncRoutes(params) {
           }
         }
       ]
-    },
-    {
-      path: '/material',
-      component: Layout,
-      redirect: 'noRedirect',
-      meta: {
-        title: '素材库',
-        icon: 'task'
-      },
-      children: [{
-        path: 'material',
-        name: 'material',
-        component: () =>
-          import('@/views/material'),
-        meta: {
-          title: '素材库',
-          icon: 'material'
-        }
-      }]
-    },
-    {
-      path: '/sharefiles',
-      component: Layout,
-      redirect: 'noRedirect',
-      meta: {
-        title: '共享文件',
-        icon: 'list'
-      },
-      children: [{
-          path: 'sharefiles',
-          name: 'sharefiles',
-          component: () =>
-            import('@/views/sharefiles'),
-          meta: {
-            title: '共享文件',
-            icon: 'list'
-          }
-        },
-        {
-          path: 'transcoding-video',
-          name: 'transcoding-video',
-          component: () =>
-            import('@/views/sharefiles/transcoding-video'),
-          meta: {
-            title: '视频解码',
-            icon: 'v2'
-          }
-        },
-      ]
-    },
-    {
-      path: '/plugin',
-      component: Layout,
-      redirect: 'noRedirect',
-      meta: {
-        title: '插件',
-        icon: 'assets'
-      },
-      children: [{
-        path: 'plugin',
-        name: 'plugin',
-        component: () =>
-          import('@/views/plugin'),
-        meta: {
-          title: '插件管理',
-          icon: 'assets'
-        }
-      }]
     },
     {
       path: '/admin',

@@ -1,7 +1,6 @@
 import {
   asyncRoutes,
-  constantRoutes,
-  trainingRouter
+  constantRoutes
 } from '@/router'
 import router from '@/router'
 /**
@@ -15,10 +14,6 @@ function hasPermission(route, UserRoles) {
   } else {
     return true
   }
-}
-//判断Training权限
-function judgeTraining(UserRoles) {
-  return 'training_manager' in UserRoles && UserRoles['training_manager']
 }
 /**
  * Filter asynchronous routing tables by recursion
@@ -52,26 +47,15 @@ const mutations = {
 
 const actions = {
   generateRoutes({
-    state,
     commit,
     rootState
   }) {
     let UserRoles = rootState.login.userInfo.auth
     return new Promise(resolve => {
-      let accessedRoutes = []
-      if (judgeTraining(UserRoles)) {
-        accessedRoutes = [...trainingRouter]
-
-      } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes(), UserRoles)
-      }
+      let accessedRoutes = filterAsyncRoutes(asyncRoutes(), UserRoles)
       commit('SET_ROUTES', accessedRoutes)
       router.addRoutes(accessedRoutes)
       resolve(accessedRoutes)
-
-      //accessedRoutes有权限的路由
-
-
     })
   }
 }

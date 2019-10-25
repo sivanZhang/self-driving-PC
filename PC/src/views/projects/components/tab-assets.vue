@@ -902,7 +902,6 @@ import { getToken } from "@/utils/auth";
 import thumbtackMixin from "@/mixins/thumbtack-mixin";
 import { getProjectStatus } from "@/api/status";
 import { searchBind, getAttrsEntityList } from "@/api/attrs";
-import { addMaterial } from "@/api/material";
 import assetMulSel from "@/views/projects/components/mulConditionSel/assetMulSel";
 import assetFilter from "@/views/projects/components/filterCondition/assetFilter";
 import assetSortMul from "@/views/projects/components/sortMul/assetSortMul";
@@ -1240,16 +1239,6 @@ export default {
           ...this.materialForm,
           ids: this.matrialId
         };
-        //console.log(dateMaterial);
-        addMaterial(dateMaterial).then(({ data }) => {
-          // if(data.status === 0){
-          this.$message.success(data.msg);
-          this.materialShow = false;
-          // }else{
-          //    this.$message.error(data.msg);
-          //   this.materialShow = false;
-          // }
-        });
       }
     },
     jumpName(val) {

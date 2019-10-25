@@ -14,9 +14,7 @@ import store from '@/store'
 import {
   getToken
 } from '@/utils/auth'
-// create an axios instance
-let baseURL = process.env.NODE_ENV === 'development' ? process.env.VUE_APP_BASE_API : location.origin
-
+const baseURL = process.env.VUE_APP_BASE_API
 const AXIOS = axios.create({
   baseURL,
   timeout: 0,
@@ -33,43 +31,19 @@ AXIOS.interceptors.request.use(
     return config
   },
   error => {
-    // do something with request error
     return Promise.reject(error)
   }
 )
 AXIOS.interceptors.response.use(
-  /**
-   * If you want to get AXIOS information such as headers or status
-   * Please return  response => response
-   */
-
-  /**
-   * Determine the request status by custom code
-   * Here is just an example
-   * You can also judge the status by AXIOS Status Code
-   */
   response => {
     const res = response
-    // if the custom code is not 20000, it is judged as an error.
     if (res.status !== 200) {
       Message({
-        message: res.message || 'Error',
-        type: 'error',
+        message: res.message || 'Response error',
+        type: 'warning',
         duration: 5 * 1000
       })
-      if (res.status === 401) {
-        // to re-login
-        MessageBox.confirm('抱歉，您没有权限', {
-          confirmButtonText: 'Re-Login',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
-        })
-      }
-      return Promise.reject(new Error(res.message || 'Error'))
+      return Promise.reject(new Error(res.message || 'Response error'))
     } else {
       return res
     }
@@ -77,7 +51,7 @@ AXIOS.interceptors.response.use(
   error => {
     console.log('error返回的状态码', error.response.status);
     Message({
-      message: error.response.statusText,
+      message: `错误内容：${error.response.statusText}  状态码：${error.response.status}`,
       type: 'error',
       duration: 5 * 1000
     })
