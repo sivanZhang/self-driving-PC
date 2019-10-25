@@ -10,6 +10,5 @@ const getters = {
   introduction: state => state.login.introduction,
   permission_routes: state => state.permission.routes,
   baseUrl: state => state.BASE_URL,
-  hasSetUrl: state => state.hasSetUrl,
 }
 export default getters

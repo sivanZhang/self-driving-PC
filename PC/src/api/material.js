@@ -1,4 +1,4 @@
-import AXIOS from '@/utils/request'
+import AXIOS from '@/libs/request'
 export function getMaterial(params) {
   return AXIOS.get('/material/material/', { params })
 }

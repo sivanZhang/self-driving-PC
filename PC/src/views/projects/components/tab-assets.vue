@@ -899,7 +899,7 @@ import * as HTTP from "@/api/assets";
 import { getRemark } from "@/api/remark";
 import { mapState } from "vuex";
 import { getToken } from "@/utils/auth";
-import thumbtackMixin from "@/utils/thumbtack-mixin";
+import thumbtackMixin from "@/mixins/thumbtack-mixin";
 import { getProjectStatus } from "@/api/status";
 import { searchBind, getAttrsEntityList } from "@/api/attrs";
 import { addMaterial } from "@/api/material";

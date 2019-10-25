@@ -174,7 +174,7 @@ import { queryTask } from "@/api/task";
 import Mallki from "@/components/TextHoverEffect/Mallki";
 import projectDrawer from "@/components/projectDrawer";
 import DrawerHeader from "@/components/projectDrawer/components/Header";
-import thumbtackMixin from "@/utils/thumbtack-mixin"
+import thumbtackMixin from "@/mixins/thumbtack-mixin"
 import { delOneProject } from "@/api/project";
 import { searchBind, getAttrsEntityList } from "@/api/attrs";
 export default {

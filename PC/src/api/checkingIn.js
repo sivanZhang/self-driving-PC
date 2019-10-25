@@ -1,4 +1,4 @@
-import AXIOS from '@/utils/request'
+import AXIOS from '@/libs/request'
 //获取加班申请列表
 export function getOvertime(params) {
     return AXIOS.get('/overtime/overtime/', {

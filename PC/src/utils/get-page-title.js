@@ -1,4 +1,4 @@
-import defaultSettings from '@/settings'
+import defaultSettings from '@/utils/settings'
 
 const title = defaultSettings.title
 //封装页面title

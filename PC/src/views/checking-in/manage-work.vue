@@ -116,7 +116,7 @@
 import { getDayOffList, addDayOff, delDayOff } from "@/api/checkingIn";
 import { mapState } from "vuex";
 import dayjs from "dayjs";
-import thumbtackMixin from "@/utils/thumbtack-mixin";
+import thumbtackMixin from "@/mixins/thumbtack-mixin";
 export default {
   mixins: [thumbtackMixin],
   name: "manage-work",

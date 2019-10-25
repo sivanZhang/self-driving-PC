@@ -1,4 +1,4 @@
-import AXIOS from '@/utils/request'
+import AXIOS from '@/libs/request'
 //上传文件
 export function uploadfile(data) {
     return AXIOS.post('/sharefiles/sharefiles/', data)

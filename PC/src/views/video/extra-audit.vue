@@ -119,7 +119,7 @@ import taskForm from "@/views/task/components/task-form";
 import tabLog from "@/views/task/components/tab-log";
 import tabTaskDtail from "@/views/task/components/tab-task-detail";
 import approveLog from "@/views/components/approve-log";
-import thumbtackMixin from "@/utils/thumbtack-mixin";
+import thumbtackMixin from "@/mixins/thumbtack-mixin";
 export default {
   mixins: [thumbtackMixin],
   components: {

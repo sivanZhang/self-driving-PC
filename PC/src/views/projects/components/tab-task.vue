@@ -873,7 +873,7 @@ import { queryAssets, getHistoryVersion } from "@/api/assets";
 import { getLinks, getLink, addLinks } from "@/api/links";
 import approveLog from "@/views/components/approve-log";
 import attrsBind from "@/components/projectDrawer/components/attrsBind";
-import thumbtackMixin from "@/utils/thumbtack-mixin";
+import thumbtackMixin from "@/mixins/thumbtack-mixin";
 import { searchBind, getAttrsEntityList } from "@/api/attrs";
 import { getProjectJoinMeb } from "@/api/training";
 import dayjs from "dayjs";

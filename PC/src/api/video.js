@@ -1,4 +1,4 @@
-import AXIOS from '@/utils/request'
+import AXIOS from '@/libs/request'
 //我的待审批任务
 export function getApprove(params = null) {
     return AXIOS.get('/approve/approve/', {

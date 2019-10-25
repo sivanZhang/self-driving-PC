@@ -1,4 +1,4 @@
-import AXIOS from '@/utils/request'
+import AXIOS from '@/libs/request'
 //获取工种列表 或者 信息
 export function getDept(params) {
   return AXIOS.get('/dept/dept/', {

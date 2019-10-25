@@ -165,7 +165,7 @@
 import { editUserDetail, deleteUser } from "@/api/admin";
 import { searchBind, getAttrsEntityList } from "@/api/attrs";
 import attrsBind from "@/components/projectDrawer/components/attrsBind";
-import thumbtackMixin from "@/utils/thumbtack-mixin";
+import thumbtackMixin from "@/mixins/thumbtack-mixin";
 export default {
   mixins: [thumbtackMixin],
   name: "UsersTable",

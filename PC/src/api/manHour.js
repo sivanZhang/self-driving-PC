@@ -1,4 +1,4 @@
-import AXIOS from '@/utils/request'
+import AXIOS from '@/libs/request'
 //获取工时
 export function getManHour(params) {
     return AXIOS.get('/overtime/workhour/?02', {

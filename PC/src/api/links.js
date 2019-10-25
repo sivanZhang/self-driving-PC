@@ -1,4 +1,4 @@
-import AXIOS from '@/utils/request'
+import AXIOS from '@/libs/request'
 import QS from 'qs'
 //获取环节
 export function getLinks(params) {

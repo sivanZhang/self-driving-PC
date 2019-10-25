@@ -297,7 +297,7 @@
 
 <script>
 import { allocationScene } from "@/api/assets";
-import thumbtackMixin from "@/utils/thumbtack-mixin";
+import thumbtackMixin from "@/mixins/thumbtack-mixin";
 import myMixin from "@/views/projects/components/mixins";
 import { getLinks } from "@/api/links";
 import { getDept } from "@/api/admin";

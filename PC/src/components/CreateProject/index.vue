@@ -245,7 +245,7 @@
 
 <script>
 import { addProjects } from "@/api/project";
-import AXIOS from "@/utils/request";
+import AXIOS from "@/libs/request";
 import { getToken } from "@/utils/auth";
 import { mapState } from "vuex";
 import { searchTemplate } from "@/api/status";

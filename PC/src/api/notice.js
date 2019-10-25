@@ -1,4 +1,4 @@
-import AXIOS from "@/utils/request"
+import AXIOS from "@/libs/request"
 
 //通知详情
 export function noticeDetail(data) {

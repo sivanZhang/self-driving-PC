@@ -1,4 +1,4 @@
-import AXIOS from '@/utils/request'
+import AXIOS from '@/libs/request'
 // 获取项目列表或者项目详情
 export function getProjects(params = null) {
   return AXIOS.get('/projects/projects/', { params })

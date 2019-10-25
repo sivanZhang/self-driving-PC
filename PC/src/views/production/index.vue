@@ -125,7 +125,7 @@
 <script>
 import remarks from "@/components/projectDrawer/components/remarks";
 import { getProduction } from "@/api/production";
-import thumbtackMixin from "@/utils/thumbtack-mixin";
+import thumbtackMixin from "@/mixins/thumbtack-mixin";
 import { getRemark } from "@/api/remark";
 
 export default {

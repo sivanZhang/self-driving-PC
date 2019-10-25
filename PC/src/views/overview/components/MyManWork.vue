@@ -84,7 +84,7 @@
 import MyCharts from "@/components/ECharts/BaseECharts";
 import { getMyManHour } from "@/api/manHour";
 import { addTaskRecord } from "@/api/task";
-import AXIOS from "@/utils/request";
+import AXIOS from "@/libs/request";
 import dayjs from "dayjs";
 let option = {
   tooltip: {

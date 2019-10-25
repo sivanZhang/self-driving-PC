@@ -103,7 +103,7 @@
   </div>
 </template>  
 <script>
-import thumbtackMixin from "@/utils/thumbtack-mixin";
+import thumbtackMixin from "@/mixins/thumbtack-mixin";
 import MyCharts from "@/components/ECharts/BaseECharts";
 import { trainTask, checkInAll, getRange } from "@/api/statistics";
 import production from "@/views/production";

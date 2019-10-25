@@ -1,4 +1,4 @@
-import AXIOS from '@/utils/request'
+import AXIOS from '@/libs/request'
 
 //按照大状态id查询小状态
 export function getMinStatus(params) {

@@ -158,7 +158,7 @@
 import Chart from "@/components/ECharts/PieChart";
 import Gantt from "@/components/Gantt";
 import * as Ajax from "@/api/manHour";
-import thumbtackMixin from "@/utils/thumbtack-mixin";
+import thumbtackMixin from "@/mixins/thumbtack-mixin";
 import { getDayOffList } from "@/api/checkingIn";
 export default {
   name: "my-man-hour",

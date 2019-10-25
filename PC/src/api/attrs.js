@@ -1,4 +1,4 @@
-import AXIOS from '@/utils/request'
+import AXIOS from '@/libs/request'
 // 删除属性
 export function delAttrs(data){
     return AXIOS.post('/attrs/attrs/?delete',data)

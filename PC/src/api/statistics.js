@@ -1,6 +1,6 @@
 //统计相关http API
 
-import AXIOS from '@/utils/request'
+import AXIOS from '@/libs/request'
 //获取项目进度统计
 export function getProjectStatistic(params) {
   return AXIOS.get('/statistic/project/', {

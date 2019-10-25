@@ -1,4 +1,4 @@
-import AXIOS from '@/utils/request'
+import AXIOS from '@/libs/request'
 //获取评论/备注信息
 export function getRemark(params) {
     return AXIOS.get('/comment/comment/', { params })

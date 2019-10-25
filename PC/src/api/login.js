@@ -1,4 +1,4 @@
-import AXIOS from '@/utils/request'
+import AXIOS from '@/libs/request'
 //登录
 export function login(data) {
     return AXIOS.post('/users/login/?json', data)

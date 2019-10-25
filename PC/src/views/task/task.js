@@ -15,7 +15,7 @@ import tabApprove from "./components/tab-approve"
 import tabTaskDtail from "./components/tab-task-detail"
 import history from "@/views/task/components/tab-history"
 import approveLog from "@/views/components/approve-log";
-import thumbtackMixin from "@/utils/thumbtack-mixin";
+import thumbtackMixin from "@/mixins/thumbtack-mixin";
 import dayjs from "dayjs";
 export default {
   mixins: [thumbtackMixin],
