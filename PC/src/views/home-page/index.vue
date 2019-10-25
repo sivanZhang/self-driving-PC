@@ -1,52 +1,13 @@
 <script>
-import MyTask from "./components/MyTask";
-import MyManWork from "./components/MyManWork";
 import noticeDetail from "@/components/Notice/components/notice-detail";
-import MyAllocation from "./components/MyAllocation";
-import taskForm from "@/views/task/components/task-form";
-import tabLog from "@/views/task/components/tab-log";
-import tabApprove from "@/views/task/components/tab-approve";
-import tabTaskDtail from "@/views/task/components/tab-task-detail";
-import approveLog from "@/views/components/approve-log";
 import { mapState } from "vuex";
-import {
-  addTaskRecord,
-  putTaskRecord,
-  queryTaskRecord,
-  queryTask,
-  getStatusTaskList
-} from "@/api/task";
 export default {
   name: "home-page",
   components: {
-    MyTask,
-    MyManWork,
-    noticeDetail,
-    MyAllocation,
-    //任务侧边栏相关
-    taskForm,
-    tabLog,
-    tabTaskDtail,
-    approveLog,
-    tabApprove
+    noticeDetail
   },
   data() {
-    return {
-      MyTaskList: [],
-      //任务侧边栏相关
-      isDrawerShow: false,
-      TaskDetail: {
-        name: ""
-      },
-      Link: "",
-      Asset: "",
-      detailLoading: false,
-      LogList: [],
-      logsLoading: false,
-      TaskRecord: [],
-      createLoading: false,
-      activeRow: {} //点击任务列表选中的列的数据
-    };
+    return {};
   },
   computed: {
     ...mapState("notice", ["Notice", "unreadCount"]),
@@ -59,75 +20,7 @@ export default {
       }
     }
   },
-  created() {
-    this.getMyTasks();
-  },
   methods: {
-    cancel() {
-      this.isDialogShow = false;
-    },
-    addRecord() {
-      this.createLoading = true;
-
-      addTaskRecord(this.TaskRecord)
-        .then(res => {
-          if (res.data.status === 0) {
-            this.$message.success(res.data.msg);
-            this.getMyTasks();
-          } else {
-            this.$message.warning(res.data.msg);
-          }
-          this.isDialogShow = false;
-          this.createLoading = false;
-          this.isDrawerShow = false;
-        })
-        .catch(err => {
-          this.createLoading = false;
-        });
-    },
-    taskBoardRightShow(row) {
-      this.isDrawerShow = true;
-
-      this.activeRow = {
-        ...row
-      };
-      this.TaskRecord = Object.assign(
-        {},
-        {
-          task_id: row.task.id,
-          type: 0,
-          date: new Date().toLocaleDateString()
-        }
-      );
-      this.logsLoading = true;
-      this.$refs["taskApprovelog"].getApproveLog(row.task.id);
-      queryTaskRecord({
-        task_id: row.task.id
-      })
-        .then(({ data }) => {
-          this.LogList = [...data.msg];
-          this.logsLoading = false;
-        })
-        .catch(() => {
-          this.logsLoading = false;
-        });
-      this.detailLoading = true;
-      this.$refs['taskDetail'].getDetail(row.task.id);
-      // queryTask({
-      //   id: row.task.id
-      // })
-      //   .then(({ data }) => {
-      //     this.TaskDetail = {
-      //       ...data.msg
-      //     };
-      //     this.Asset = this.TaskDetail.asset;
-      //     this.Link = this.TaskDetail.link_dept_name;
-      //     this.detailLoading = false;
-      //   })
-      //   .catch(() => {
-      //     this.detailLoading = false;
-      //   });
-    },
     //修改是否已读
     updateIsRead(row) {
       console.log(row);
@@ -143,15 +36,6 @@ export default {
           //this.$message.success(data.msg);
           this.getNoticeDetail();
         }
-      });
-    },
-    //获取我在进行中的任务
-    getMyTasks() {
-      getStatusTaskList({
-        mytask: null,
-        status: 2
-      }).then(({ data }) => {
-        this.MyTaskList = [...data.msg];
       });
     },
     getNoticeDetail() {
@@ -274,62 +158,7 @@ export default {
           </div>
         </el-card>
       </el-col>
-      <!-- <svg-icon icon-class="caitongzhi" />-->
-      <el-col :span="5">
-        <MyTask
-          :my-task-list="MyTaskList"
-          @show-drawer="taskBoardRightShow"
-        />
-      </el-col>
-      <el-col :span="6">
-        <MyManWork :my-tasks="MyTaskList" class="card" />
-      </el-col>
-      <el-col :span="4">
-        <MyAllocation />
-      </el-col>
     </el-row>
-    <Drawer
-      scrollable
-      v-model="isDrawerShow"
-      width="512px"
-      inner
-      :mask-style="{backgroundColor: 'transparent'}"
-      :transfer="false"
-      draggable
-    >
-      <el-tabs>
-        <el-tab-pane label="任务详情">
-          <tabTaskDtail
-            ref="taskDetail"
-            :link="Link"
-            :asset="Asset"
-            :detailLoading="detailLoading"
-          />
-        </el-tab-pane>
-        <el-tab-pane label="执行记录">
-          <tabLog :loglist="LogList" :logsLoading="logsLoading" />
-        </el-tab-pane>
-        <el-tab-pane label="执行任务">
-          <task-form
-            :task-record.sync="TaskRecord"
-            :createLoading="createLoading"
-            @addRecord="addRecord"
-            @cancel="cancel"
-          />
-        </el-tab-pane>
-        <el-tab-pane label="提交审核">
-          <tab-approve
-            v-if="activeRow.task && activeRow.task.status === 2"
-            :row="activeRow"
-            @refresh="getMyTasks"
-          />
-          <div v-else style="display:flex;justify-content:center">任务状态不是进行中</div>
-        </el-tab-pane>
-        <el-tab-pane label="审批记录">
-          <approve-log ref="taskApprovelog" />
-        </el-tab-pane>
-      </el-tabs>
-    </Drawer>
   </div>
 </template>
 

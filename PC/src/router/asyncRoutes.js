@@ -69,16 +69,6 @@ export default function asyncRoutes(params) {
           }
         },
         {
-          path: 'bind',
-          name: 'settings',
-          component: () =>
-            import('@/views/admin/bind'),
-          meta: {
-            title: '绑定',
-            icon: 'bangding'
-          }
-        },
-        {
           path: 'attrs',
           name: 'customAttrs',
           component: () =>
@@ -86,36 +76,6 @@ export default function asyncRoutes(params) {
           meta: {
             title: '自定义属性',
             icon: 'custom-attrs',
-          }
-        },
-        {
-          path: 'time-management',
-          name: 'time-management',
-          component: () =>
-            import('@/views/admin/time-management'),
-          meta: {
-            title: '时间管理',
-            icon: 'fs',
-          }
-        },
-        {
-          path: 'extra-approve',
-          name: 'extra-approve',
-          component: () =>
-            import('@/views/checking-in/extra-approve'),
-          meta: {
-            title: '加班审批模板',
-            icon: 'extra-approve',
-          }
-        },
-        {
-          path: 'menu',
-          name: 'menu',
-          component: () =>
-            import('@/views/admin/menu'),
-          meta: {
-            title: '考勤时间设置',
-            icon: 'menu',
           }
         },
       ]

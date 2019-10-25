@@ -1,9 +1,6 @@
 import {
   noticeDetail
 } from "@/api/notice"
-import {
-  getOverTimeApprove
-} from "@/api/checkingIn";
 const state = {
   Notice: null, //我的审批任务列表
   unreadCount: null,
