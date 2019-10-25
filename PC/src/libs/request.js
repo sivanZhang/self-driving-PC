@@ -51,7 +51,6 @@ AXIOS.interceptors.response.use(
   response => {
     const res = response
     // if the custom code is not 20000, it is judged as an error.
-    console.log('response返回的状态码', res.status);
     if (res.status !== 200) {
       Message({
         message: res.message || 'Error',

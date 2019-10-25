@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import Settings from '@/utils/settings'
+import Settings from './Settings'
   import { mapGetters } from "vuex";
   import Breadcrumb from "@/components/Breadcrumb";
   import Hamburger from "@/components/Hamburger";
