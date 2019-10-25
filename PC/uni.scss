@@ -1,0 +1,109 @@
+/* 颜色变量 */
+
+$border-color: #c8c8cc;
+$text-color-grey: #c8c8c8;
+.warp-pb {
+    /* if有底部菜单的时候 */
+    padding-bottom: 104.166upx;
+}
+
+.container {
+    padding-right: 31.25upx;
+    padding-left: 31.25upx;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    margin-right: -31.25upx;
+    margin-left: -31.25upx;
+}
+
+.text-overflow {
+    display: block;
+    /*内联对象需加*/
+    width: 100%;
+    word-break: keep-all;
+    /* 不换行 */
+    white-space: nowrap;
+    /* 不换行 */
+    overflow: hidden;
+    /* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow: ellipsis;
+    /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+
+.relative {
+    position: relative;
+}
+
+.common-btn {
+    display: inline-block;
+    padding: 12.5upx 25upx;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    background-image: none;
+    border: 2.083upx solid transparent;
+}
+
+.common-inp {
+    background-color: #fff;
+    border: 2.083upx solid #c8c8cc;
+    color: #24292e;
+    outline: none;
+    padding: 0 25upx;
+    vertical-align: middle;
+    box-sizing: border-box;
+    height: 85.416upx;
+    line-height: 85.416upx;
+}
+
+.delete-icon {
+    width: 41.666rpx;
+    height: 41.666rpx;
+    object-fit: unset;
+}
+
+image {
+    will-change: transform
+}
+
+
+/* 
+ *
+ * @默认
+ *
+ */
+
+page {
+    color: #222329;
+    font-family: 'OpenSans-Regular';
+    margin: 0;
+    padding: 0;
+    font-size: 29.166upx;
+}
+
+image {
+    object-fit: cover;
+    vertical-align: middle;
+}
+
+image,
+view,
+text,
+textarea,
+form,
+button,
+label,
+rich-text,
+switch {
+    box-sizing: border-box;
+}
+
+
+/* 更改UNI默认 */
+
+uni-button:after {
+    border: none!important;
+}

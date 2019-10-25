@@ -1,0 +1,47 @@
+#userGroup {
+    .el-radio-group {
+        display: block;
+    }
+    .el-delete {
+        position: relative;
+    }
+    .custom-tree-node {
+        height: 40px;
+        line-height: 40px;
+        &:hover {
+            .iconWarp {
+                display: inline-block;
+            }
+        }
+        .iconWarp {
+            display: none;
+        }
+    }
+    .iconWarp {
+        display: none;
+        font-size: 12px;
+        &>* {
+            cursor: pointer;
+        }
+    }
+    .el-container {
+        min-height: calc(100vh - 50px);
+    }
+    .tag-nav {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+            background-color: #ebeef5;
+        }
+    }
+    .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

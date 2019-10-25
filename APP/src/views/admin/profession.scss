@@ -1,0 +1,57 @@
+#profession {
+    .nav-title {
+        padding: 8px 0;
+        .el-col {
+            color: #909399;
+        }
+    }
+    .search-group {
+        margin-bottom: 10px;
+    }
+    .t-header {
+        padding: 8px 12px;
+        margin-bottom: 10px;
+        background-color: #E4E7ED;
+    }
+    .el-main {
+        padding: 0;
+    }
+    .el-container {
+        min-height: calc(100vh - 50px);
+    }
+    .el-aside {
+        max-height: calc(100vh - 50px);
+        overflow-y: scroll;
+    }
+    .iconWarp {
+        display: none;
+        font-size: 12px;
+        &>* {
+            cursor: pointer;
+        }
+    }
+    .tag-nav {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+            background-color: #ebeef5;
+        }
+    }
+    .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .custom-tree-node {
+        &:hover {
+            .iconWarp {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

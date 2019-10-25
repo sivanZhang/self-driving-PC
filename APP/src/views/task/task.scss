@@ -1,0 +1,110 @@
+$linkCorlor:#2d8cf0;
+
+#layout_main {
+  .el-table {
+    .el-input__inner {
+      border: 0;
+      padding-left: 0;
+      background: transparent;
+      color: $linkCorlor;
+    }
+  }
+
+  .fold-icon {
+    text-align: right;
+    cursor: pointer;
+  }
+
+  .project-warp {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+
+  .board-column-content {
+    height: 100%;
+    min-height: 51px;
+  }
+
+  .cardvalue {
+    word-break: break-all;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+  }
+
+  .feedback {
+    font-size: 12px;
+    padding-left: 10px;
+    padding-top: 4px;
+    padding-bottom: 15px
+  }
+
+  .status {
+    i {
+      display: none;
+    }
+
+    &:hover {
+      i {
+        display: block;
+      }
+    }
+  }
+
+  .tab-task {
+    min-height: calc(100vh - 294px)
+  }
+
+  .layout_main_top {
+    display: flex;
+  }
+
+  .layout_main_top_left {
+    display: flex;
+    width: 70%;
+    height: 50px;
+    justify-content: flex-start;
+  }
+
+  .layout_main_top_right {
+    display: flex;
+    width: 30%;
+    height: 50px;
+    justify-content: flex-end;
+  }
+
+  a,
+  a:focus,
+  a:hover {
+    cursor: pointer;
+    color: $linkCorlor !important;
+    text-decoration: underline !important;
+  }
+
+  .layout_task {
+    width: 100px;
+    height: 40px;
+    border-right: 1px solid #ddd;
+    text-align: center;
+    color: #909399;
+    cursor: pointer;
+
+    .layout_top_span {
+      // color: #909399;
+      font-size: small;
+    }
+
+    &:first-child {
+      border-left: 1px solid #ddd;
+    }
+
+    .active {
+      color: $linkCorlor;
+    }
+
+  }
+
+  .el-image {
+    display: inline
+  }
+}

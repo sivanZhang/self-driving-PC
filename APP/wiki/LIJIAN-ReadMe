@@ -1,0 +1,11 @@
+1.视频播放器公共组件使用方法如下:
+    <video-player :url="url" @getCutImg="getCutImg"/>
+    import VideoPlayer from '@/components/VideoPlayer'
+    getCutImg(obj){
+         this.imgList.push(obj);
+         console.log(this.imgList);
+     },
+    说明:@getCutImg  若不回传截图后的base64及秒数   此属性不用写
+
+    后期会扩展一个属性 是否存在截图
+    把群内发的测试视频放到public文件夹下即可
