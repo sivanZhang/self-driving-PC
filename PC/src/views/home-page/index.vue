@@ -1,7 +1,6 @@
 <script>
 import MyTask from "./components/MyTask";
 import MyManWork from "./components/MyManWork";
-import MyApprove from "./components/MyApprove";
 import noticeDetail from "@/components/Notice/components/notice-detail";
 import MyAllocation from "./components/MyAllocation";
 import taskForm from "@/views/task/components/task-form";
@@ -22,7 +21,6 @@ export default {
   components: {
     MyTask,
     MyManWork,
-    MyApprove,
     noticeDetail,
     MyAllocation,
     //任务侧边栏相关
@@ -285,10 +283,6 @@ export default {
       </el-col>
       <el-col :span="6">
         <MyManWork :my-tasks="MyTaskList" class="card" />
-      </el-col>
-
-      <el-col :span="5">
-        <MyApprove />
       </el-col>
       <el-col :span="4">
         <MyAllocation />

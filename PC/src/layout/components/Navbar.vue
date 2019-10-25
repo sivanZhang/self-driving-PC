@@ -4,7 +4,6 @@
       <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
       <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
     </div>
-    <shortcut-menu/>
     <div class="right-menu">
       <template v-if="device!=='mobile'">
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
@@ -38,7 +37,6 @@ import Settings from './Settings'
   import Breadcrumb from "@/components/Breadcrumb";
   import Hamburger from "@/components/Hamburger";
   import Screenfull from "@/components/Screenfull";
-  import ShortcutMenu from "./ShortcutMenu";
   import Notice from "@/components/Notice"
 
   export default {
@@ -51,7 +49,6 @@ import Settings from './Settings'
       Breadcrumb,
       Hamburger,
       Screenfull,
-      ShortcutMenu,
       Settings,
       Notice
     },
