@@ -55,7 +55,7 @@
 				const rex = /\d{4}/;
 				if (rex.test(this.code)) {
 					uni.request({
-					  url: `${this.$BaseUrl}/users/emailscode/${this.email}/${this.code}?json`,
+					  url: `${this.$store.state.BaseUrl}/users/emailscode/${this.email}/${this.code}?json`,
 					  method: "get",
 					  success: res => {
 					    if (res.data.status == "ok") {
@@ -88,7 +88,7 @@
 					code: this.code
 				};
 				uni.request({
-				  url: `${this.$BaseUrl}/users/find_password?json`,
+				  url: `${this.$store.state.BaseUrl}/users/find_password?json`,
 				  data,
 				  method: "post",
 				  success: res => {
@@ -98,7 +98,7 @@
 					  	  icon: "none",
 					  	});
 					  	uni.navigateTo({
-					  	  url: "/pages/login/Login"
+					  	  url: "/pages/login/login-page"
 					  	});
 					  } else {
 					  	uni.showToast({
@@ -113,7 +113,7 @@
 				const pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 				if (pattern.test(this.email)) {
 					uni.request({
-					  url: `${this.$BaseUrl}/users/emailscode/${this.email}?json`,
+					  url: `${this.$store.state.BaseUrl}/users/emailscode/${this.email}?json`,
 					  method: "get",
 					  success: res => {
 					    if (res.data.status == "ok") {
@@ -145,5 +145,51 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "./Forgot.scss";
+	#forgot {
+  .p {
+    width: 520.833upx;
+    color: #c8c8c8;
+    margin: 0 auto 31.25upx;
+		 text-align: center;
+  }
+
+  .h3 {
+    text-align: center;
+    font-size: 37.5upx;
+    height:97.916upx;
+    line-height: 97.916upx;
+  }
+
+  button.conmmt-btn {
+    display: block;
+    width:  520.833upx;
+    height: 85.416upx;
+    border-radius: 85.416upx;
+    margin: 0 auto;
+    background-color: #fad87b;
+    margin-top: 58.333upx;
+    font-size: 31.25upx;
+  }
+  .common-inp {
+		height: 89.583upx;
+		line-height: 89.583upx;
+    width:  520.833upx;
+		display: block;
+		margin: 0 auto;
+  }
+
+  .logo {
+    margin: 31.25upx auto 31.25upx;
+    text-align: center;
+
+    image {
+      height: 195.833upx;
+      width:195.833upx;
+      border-radius: 50%;
+      background-color: #d8d8d8;
+      border: 1px solid #c8c8cc;
+    }
+  }
+}
+
 </style>

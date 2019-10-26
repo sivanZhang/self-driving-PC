@@ -8,7 +8,7 @@
 			<input :password="true" v-model="Password" placeholder="Password" placeholder-style="color:#fab701;">
 		</view>
 		<view class="links">
-			<navigator url="/pages/login/Forgot">Reset My Password</navigator>
+			<navigator url="/pages/login/forgot-password">Reset My Password</navigator>
 		</view>
 		<button class="sunbmit common-btn" :loading="isLoding" @tap="submit">Log In</button>
 		
@@ -49,7 +49,7 @@
 					password: this.Password,
 				};
 				uni.request({
-					url: `${this.$BaseUrl}/users/login/?json`,
+					url: `${this.$store.state.BaseUrl}/users/login/?json`,
 					data,
 					method: "post",
 					success: res => {
@@ -57,14 +57,13 @@
 						if (res.data.status == "ok") {
 							this.$store.commit("setToken", `JWT ${res.data.token}`);
 							this.$store.commit("setUserId", res.data.id);
-							console.log(res.data)
 							uni.showToast({
 								title: res.data.msg,
 								icon: "none",
 								success() {
 									setTimeout(() => {
 										uni.redirectTo({
-											url: "/pages/home/home",
+											url: "/pages/home/home-page",
 											animationType: 'pop-in',
 											animationDuration: 200
 										})

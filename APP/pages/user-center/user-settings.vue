@@ -21,7 +21,7 @@
 					duration: 1500,
 					success() {
 						setTimeout(() => {
-							self.$url("/pages/login/Login")
+							self.$url("/pages/login/login-page")
 						}, 1000);
 					}
 				});
@@ -30,7 +30,7 @@
 		},
 		onNavigationBarButtonTap() {
 			uni.reLaunch({
-				url:"/pages/home/home"
+				url:"/pages/home/home-page"
 			})
 		}
 	};

@@ -24,7 +24,7 @@
 		methods: {
 			targetDetails(id) {
 				uni.navigateTo({
-					url: "/pages/notifications/newdetail?id=" + id
+					url: "/pages/notifications/new-detail?id=" + id
 				})
 			}
 		},
@@ -35,7 +35,7 @@
 		},
 		onNavigationBarButtonTap() {
 			uni.reLaunch({
-				url:"/pages/home/home"
+				url:"/pages/home/home-page"
 			})
 		}
 	};

@@ -1,7 +1,7 @@
 {
     "pages" : [
         {
-            "path" : "pages/home/home",
+            "path" : "pages/home/home-page",
             "style" : {
                 "navigationStyle" : "custom",
                 "app-plus" : {
@@ -10,7 +10,7 @@
             }
         },
         {
-            "path" : "pages/login/Login",
+            "path" : "pages/login/login-page",
             "style" : {
                 "navigationStyle" : "custom",
                 "app-plus" : {
@@ -19,13 +19,13 @@
             }
         },
         {
-            "path" : "pages/login/Forgot",
+            "path" : "pages/login/forgot-password",
             "style" : {
                 "navigationBarTitleText" : "Reset Password"
             }
         },
         {
-            "path" : "pages/userCenter/Settings",
+            "path" : "pages/user-center/user-settings",
             "style" : {
                 "navigationBarTitleText" : "Settings",
                 "app-plus" : {
@@ -41,13 +41,13 @@
             }
         },
         {
-            "path" : "pages/userCenter/MyAccount",
+            "path" : "pages/user-center/my-account",
             "style" : {
                 "navigationBarTitleText" : "My Account"
             }
         },
         {
-            "path" : "pages/notifications/news",
+            "path" : "pages/notifications/new-list",
             "style" : {
                 "navigationBarTitleText" : "News",
                 "app-plus" : {
@@ -63,7 +63,7 @@
             }
         },
         {
-            "path" : "pages/notifications/Notifications",
+            "path" : "pages/notifications/notification-list",
             "style" : {
                 "navigationBarTitleText" : "Notifications",
                 "app-plus" : {
@@ -79,7 +79,7 @@
             }
         },
         {
-            "path" : "pages/notifications/newdetail",
+            "path" : "pages/notifications/new-detail",
             "style" : {
                 "navigationBarTitleText" : "View News",
                 "app-plus" : {

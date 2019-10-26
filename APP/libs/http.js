@@ -1,5 +1,5 @@
 import uniRequest from 'uni-request'
-import store from '@/store/index'
+import store from '@/store'
 let Ajax = Object.create(uniRequest);
 Ajax.defaults.baseURL = "https://levy.chidict.com";
 Ajax.interceptors.request.use(

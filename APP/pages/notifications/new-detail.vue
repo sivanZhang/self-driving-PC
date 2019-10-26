@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { GET_NewsDtail } from "@/api/notice.js";
+import { GET_News } from "@/api/notice.js";
 export default {
   data() {
     return {
@@ -23,13 +23,13 @@ export default {
     };
   },
   onLoad(option) {
-    GET_NewsDtail(option).then(res => {
+    GET_News(option).then(res => {
       this.newsDetailData = res.data.msg;
     });
   },
 	onNavigationBarButtonTap() {
 		uni.reLaunch({
-			url:"/pages/home/home"
+			url:"/pages/home/home-page"
 		})
 	}
 };

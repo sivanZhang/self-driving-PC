@@ -87,7 +87,7 @@
 				} else if (data.fields.category == 1) {
 					this.$url(`/pages/Parking/ParkingDetail?id=${data.fields.task_id}`)
 				} else if (data.fields.category == 2) {
-					this.$url(`/pages/notifications/newsditail?id=${data.fields.task_id}`)
+					this.$url(`/pages/notifications/new-listditail?id=${data.fields.task_id}`)
 				}
 			},
 			deleteNotice(e, ids) {
@@ -137,7 +137,7 @@
 		},
 		onNavigationBarButtonTap() {
 			uni.reLaunch({
-				url: "/pages/home/home"
+				url: "/pages/home/home-page"
 			})
 		}
 	};

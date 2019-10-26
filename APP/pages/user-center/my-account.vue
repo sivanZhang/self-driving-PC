@@ -28,7 +28,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="section" @tap="target('/pages/notifications/Notifications')">
+		<view class="section" @tap="target('/pages/notifications/notification-list')">
 			<view>
 				<image class="icon" src="/static/icons/notify.png"></image>
 				Notifications
@@ -49,7 +49,7 @@
 				<uni-icon type="arrowright"></uni-icon>
 			</view>
 		</view>
-		<view class="section" @tap="target('/pages/userCenter/Settings')">
+		<view class="section" @tap="target('/pages/user-center/user-settings')">
 			<view>
 				<image class="icon" src="/static/icons/setting.png"></image>
 				Setting
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+	import {GET_Notice} from '@/api/notice'
 	import uniBadge from "@/components/uni-badge/uni-badge.vue"
 	import uniIcon from "@/components/uni-icon/uni-icon.vue"
 	export default {
@@ -82,7 +83,7 @@
 			}
 		},
 		onLoad() {
-			this.$ajax.get("/notice/notice/?json").then(res => {
+			GET_Notice().then(res => {
 				this.noticeData = res.data.msg;
 				this.noticeData = this.noticeData.filter(item => item.fields.read == 0);
 			})
