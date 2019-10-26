@@ -3,6 +3,7 @@
 		<view class="header">
 			<view class="title">
 				Home
+				{{$store.state.test.test}}
 				<view class="hint">
 					<template v-if="noticeData.length > 0">
 						<image @tap="target('/pages/notifications/Notifications')" src="/static/icons/bell.png" mode="aspectFit"></image>

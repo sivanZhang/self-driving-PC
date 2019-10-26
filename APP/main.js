@@ -6,7 +6,6 @@ import * as filters from './filters' // global filters
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key])
 })
-Vue.prototype.$store = store
 Vue.prototype.$BaseUrl = "https://levy.chidict.com"
 Vue.prototype.$ajax = uniRequest
 Vue.prototype.$url = (url) => {
