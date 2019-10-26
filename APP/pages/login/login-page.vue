@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import {POST_LOGIN} from '@/api/login'
 	export default {
 		data() {
 			return {
@@ -48,11 +49,7 @@
 					phone: this.PhoneNumber,
 					password: this.Password,
 				};
-				uni.request({
-					url: `${this.$store.state.BaseUrl}/users/login/?json`,
-					data,
-					method: "post",
-					success: res => {
+				POST_LOGIN(data).then(res => {
 						this.isLoding = false;
 						if (res.data.status == "ok") {
 							this.$store.commit("setToken", `JWT ${res.data.token}`);
@@ -77,36 +74,7 @@
 								icon: "none",
 							})
 						}
-					},
-					fail() {
-						this.isLoding = false;
-						uni.showToast({
-							title: "Fail",
-							icon: "none",
-						})
-					}
-				});
-				// }.then(res => {
-				//             this.loading = false;
-				//             if (res.data.status == "ok") {
-				//               this.isloding = false;
-				//               this.$toast(res.data.msg);
-				//               this.$store.commit("setToken", `JWT ${res.data.token}`);
-				//               this.$store.commit("setUserId", res.data.id);
-				//               /* this.$store.commit("setUserName", res.data.username);
-				//               this.$store.commit("setPortrait", res.data.portrait); */
-				//               let redirect = decodeURIComponent(
-				//                 this.$route.query.redirect || "/"
-				//               );
-				//               this.$router.replace({
-				//                 path: redirect
-				//               });
-				//             } else if (res.data.status == "error") {
-				//               this.$toast(res.data.msg);
-				//               this.isloding = false;
-				//             }
-				//           })
-				//           .catch(error => { this.isloding = false; });
+					})
 			}
 		}
 	};

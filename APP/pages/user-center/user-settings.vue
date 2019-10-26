@@ -21,7 +21,9 @@
 					duration: 1500,
 					success() {
 						setTimeout(() => {
-							self.$url("/pages/login/login-page")
+							uni.navigateTo({
+        url:"/pages/login/login-page"
+    })
 						}, 1000);
 					}
 				});

@@ -5,7 +5,7 @@ export function POST_LOGIN(payload) {
 };
 //获取验证码
 export function GET_Password(params) {
-    return Ajax.get('/users/emailscode/${params}?json', {
+    return Ajax.get(`/users/emailscode/${params}?json`, {
         params
     });
 }

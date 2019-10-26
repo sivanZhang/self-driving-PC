@@ -1,9 +1,9 @@
 import uniRequest from 'uni-request'
 import store from '@/store'
 let Ajax = Object.create(uniRequest);
-Ajax.defaults.baseURL = "https://levy.chidict.com";
 Ajax.interceptors.request.use(
 	config => {
+		config.baseURL = store.state.BaseUrl;
 		let token = uni.getStorageSync('estateToken') || store.state.estateToken;
 		token && (config.headers.Authorization = token);
 		return config;

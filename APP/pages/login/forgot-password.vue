@@ -26,7 +26,7 @@
 </template>
 
 <script>
-	/* import { GET_Password, SET_Password } from "@/api/login"; */
+	import { GET_Password, SET_Password } from "@/api/login";
 	import uniSteps from "@/components/uni-steps/uni-steps.vue"
 	export default {
 		components: {
@@ -54,10 +54,7 @@
 			verify() {
 				const rex = /\d{4}/;
 				if (rex.test(this.code)) {
-					uni.request({
-					  url: `${this.$store.state.BaseUrl}/users/emailscode/${this.email}/${this.code}?json`,
-					  method: "get",
-					  success: res => {
+					GET_Password(`${this.email}/${this.code}`).then(res => {
 					    if (res.data.status == "ok") {
 							if (res.data.status == "ok") {
 								uni.showToast({
@@ -72,8 +69,7 @@
 								});
 							}
 					    }
-					  }
-					});
+					  })
 				} else {
 					uni.showToast({
 					  title:"Code error!",
@@ -87,11 +83,8 @@
 					password: this.password,
 					code: this.code
 				};
-				uni.request({
-				  url: `${this.$store.state.BaseUrl}/users/find_password?json`,
-				  data,
-				  method: "post",
-				  success: res => {
+				SET_Password(data).then(
+					res => {
 					  if (res.data.status == "ok") {
 					  	uni.showToast({
 					  	  title: res.data.msg,
@@ -107,15 +100,12 @@
 					  	});
 					  }
 				  }
-				});
+				)
 			},
 			next() {
 				const pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 				if (pattern.test(this.email)) {
-					uni.request({
-					  url: `${this.$store.state.BaseUrl}/users/emailscode/${this.email}?json`,
-					  method: "get",
-					  success: res => {
+					GET_Password(`${this.email}`).then(res => {
 					    if (res.data.status == "ok") {
 							if (res.data.status == "ok") {
 								uni.showToast({
@@ -130,8 +120,7 @@
 								});
 							}
 					    }
-					  }
-					});
+					  })
 				} else {
 					uni.showToast({
 					  title: "Mailbox format error!",

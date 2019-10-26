@@ -18,7 +18,7 @@
 		</view>
 		<view class="main">
 			<view class="mask">
-				<view class="left" @tap="$url('/pages/notifications/new-list')">
+				<view class="left" @tap="target('/pages/notifications/new-list')">
 					<image src="/static/icons/laba.svg"></image>
 					<view class="tag-p">All News</view>
 					<uni-icon type="arrowdown" size="18" style="color: #c8c8c8;"></uni-icon>
@@ -65,7 +65,9 @@
 		onLoad() {
 			const Token = this.$store.state.estateToken || uni.getStorageSync('estateToken');
 			if (!Token) {
-				this.$url("/pages/login/login-page")
+				uni.navigateTo({
+        url:"/pages/login/login-page"
+    })
 			} else {
 				GET_Notice().then(res => {
 					this.noticeData = [...res.data.msg];

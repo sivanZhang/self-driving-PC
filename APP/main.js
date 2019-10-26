@@ -5,11 +5,6 @@ import * as filters from './filters' // global filters
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key])
 })
-Vue.prototype.$url = (url) => {
-    uni.navigateTo({
-        url,
-    })
-}
 Vue.config.productionTip = false
 App.mpType = 'app'
 
