@@ -30,12 +30,13 @@ const actions = {
     login({
         commit
     }, {
-        username,
+        phone,
         password
     }) {
         return new Promise((resolve, reject) => {
             userApi.login({
-                email: username.trim(),
+             //   phone: phone.trim(),
+                phone:phone,
                 password: password
             }).then(({
                 data

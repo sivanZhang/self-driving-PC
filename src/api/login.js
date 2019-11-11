@@ -1,7 +1,7 @@
 import AXIOS from '@/libs/request'
 //登录
 export function login(data) {
-    return AXIOS.post('/users/login/?json', data)
+    return AXIOS.post('/users/login/', data)
 }
 //发送邮箱验证码   state = true为找回密码 ； 否则为申请账号
 export function getEmailCode(payload) {

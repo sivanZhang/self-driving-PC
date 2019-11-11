@@ -9,18 +9,37 @@
       label-position="left"
     >
       <div class="title-container">
-        <h3 class="title">wefxs</h3>
+        <h3 class="title">嗨自驾</h3>
       </div>
 
-      <el-form-item prop="username">
+      <!-- <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
           ref="username"
-          v-model="loginForm.username"
-          placeholder="邮箱"
+          v-model.number="loginForm.username"
+          placeholder="电话号码"
           name="username"
+          type="text"
+          tabindex="1"
+          auto-complete="on"
+        />
+      </el-form-item>-->
+      <!-- <el-form-item label="手机号" prop="phone">
+
+            <el-input v-model.number="ruleForm.phone"/>
+
+      </el-form-item>-->
+      <el-form-item prop="phone">
+        <span class="svg-container">
+          <svg-icon icon-class="user" />
+        </span>
+        <el-input
+          ref="phone"
+          v-model.number="loginForm.phone"
+          placeholder="电话号码"
+          name="phone"
           type="text"
           tabindex="1"
           auto-complete="on"
@@ -69,17 +88,37 @@
 export default {
   name: "SignIn",
   data() {
+    var checkPhone = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("手机号不能为空"));
+      } else {
+        const reg = /^1[3|4|5|7|8][0-9]\d{8}$/;
+       // console.log(reg.test(value));
+        if (reg.test(value)) {
+          callback();
+        } else {
+          return callback(new Error("请输入正确的手机号"));
+        }
+      }
+    };
+
     return {
       loginForm: {
-        username: "", //1212@1212.com
+        phone: "", //18888888888
         password: ""
       },
       loginRules: {
-        username: [
+        // username: [
+        //   {
+        //     required: true,
+        //     trigger: "blur",
+        //     message: "请输入登录邮箱"
+        //   }
+        // ],
+        phone: [
           {
-            required: true,
-            trigger: "blur",
-            message: "请输入登录邮箱"
+            validator: checkPhone,
+            trigger: "blur"
           }
         ],
         password: [
@@ -115,6 +154,10 @@ export default {
       });
     },
     handleLogin() {
+      // let data = {
+			// 		phone: this.loginForm.phone,
+			// 		password: this.Password,
+			// 	};
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true;

@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'wefxs',
+  title: '嗨自驾',
 
   /**
    * @type {boolean} true | false
