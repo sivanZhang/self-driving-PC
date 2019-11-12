@@ -1,5 +1,5 @@
 <template>
-  <div class="login-container">
+  <div class="login-container" style="width:100%;margin-bottom:30px; height:37px;">
     <el-form
       ref="loginForm"
       :model="loginForm"
@@ -12,25 +12,7 @@
         <h3 class="title">嗨自驾</h3>
       </div>
 
-      <!-- <el-form-item prop="username">
-        <span class="svg-container">
-          <svg-icon icon-class="user" />
-        </span>
-        <el-input
-          ref="username"
-          v-model.number="loginForm.username"
-          placeholder="电话号码"
-          name="username"
-          type="text"
-          tabindex="1"
-          auto-complete="on"
-        />
-      </el-form-item>-->
-      <!-- <el-form-item label="手机号" prop="phone">
-
-            <el-input v-model.number="ruleForm.phone"/>
-
-      </el-form-item>-->
+     
       <el-form-item prop="phone">
         <span class="svg-container">
           <svg-icon icon-class="user" />
@@ -73,13 +55,14 @@
         @click.native.prevent="handleLogin"
       >登录</el-button>
       <el-row :gutter="15">
-        <el-col :span="12" class="link">
+        <!-- <el-col :span="12" class="link">
           <router-link to="/signup">申请账号</router-link>
-        </el-col>
-        <el-col :span="12" class="link">
+        </el-col> -->
+        <el-col :span="12" class="link" :offset="12">
           <router-link to="/forgot">找回密码</router-link>
         </el-col>
       </el-row>
+      
     </el-form>
   </div>
 </template>
@@ -108,13 +91,6 @@ export default {
         password: ""
       },
       loginRules: {
-        // username: [
-        //   {
-        //     required: true,
-        //     trigger: "blur",
-        //     message: "请输入登录邮箱"
-        //   }
-        // ],
         phone: [
           {
             validator: checkPhone,
@@ -154,10 +130,6 @@ export default {
       });
     },
     handleLogin() {
-      // let data = {
-			// 		phone: this.loginForm.phone,
-			// 		password: this.Password,
-			// 	};
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true;
@@ -212,6 +184,7 @@ $cursor: #fff;
     display: inline-block;
     height: 47px;
     width: 85%;
+    
 
     input {
       background: transparent;
@@ -222,6 +195,7 @@ $cursor: #fff;
       color: $light_gray;
       height: 47px;
       caret-color: $cursor;
+     
 
       &:-webkit-autofill {
         box-shadow: 0 0 0px 1000px $bg inset !important;
@@ -231,8 +205,9 @@ $cursor: #fff;
   }
 
   .el-form-item {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
+   // border: 1px solid rgba(255, 255, 255, 0.1);
+   border: 1px solid #d2c1c1;
+    //background: rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     color: #454545;
   }
@@ -247,20 +222,25 @@ $light_gray: #eee;
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-color: $bg;
+ // background-color: $bg;
   overflow: hidden;
+  background-image: url('../../icons/bkground.jpg');
+  background-size:100%;
 
   .login-form {
     position: relative;
     width: 407px;
+    height: 400px;
     max-width: 100%;
-    padding: 160px 35px 0;
+    padding: 70px 35px 0;
     margin: 0 auto;
     overflow: hidden;
+   // border: 2px solid #d2c1c1;
+    margin-top:100px;
   }
 
   .svg-container {
-    padding: 6px 5px 6px 15px;
+    padding: 6px 31px 6px 15px;
     color: $dark_gray;
     vertical-align: middle;
     width: 30px;
@@ -272,7 +252,8 @@ $light_gray: #eee;
 
     .title {
       font-size: 26px;
-      color: $light_gray;
+      // color: $light_gray;
+      color:#795548;
       margin: 0px auto 40px auto;
       text-align: center;
       font-weight: bold;
