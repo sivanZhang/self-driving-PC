@@ -80,7 +80,25 @@ export default function asyncRoutes(params) {
         },
       ]
     },
-    
+    {
+      path: '/gift-manage',
+      component: Layout,
+      redirect: 'noRedirect',
+      meta: {
+        title: '礼品管理',
+        icon: 'gift'
+      },
+      children: [{
+        path: 'gift-manage',
+        name: 'gift-manage',
+        component: () =>
+          import('@/views/gift-manage'),
+        meta: {
+          title: '礼品管理',
+          icon: 'gift'
+        }
+      }]
+    },
     { // 404必须在最后面
       path: '*',
       redirect: '/404',
