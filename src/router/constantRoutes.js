@@ -30,6 +30,7 @@ export default [
     component: () =>
       import('@/views/login/signup'),
   },
+ 
   {
     path: '/404',
     component: () =>

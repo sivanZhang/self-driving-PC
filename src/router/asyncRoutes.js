@@ -97,7 +97,18 @@ export default function asyncRoutes(params) {
           title: '礼品管理',
           icon: 'gift'
         }
-      }]
+      },
+      {
+        path: 'add-gifts',
+        name: 'add-gifts',
+        component: () =>
+          import('@/views/add-gifts'),
+        meta: {
+          title: '添加礼品',
+          icon: 'gift'
+        }
+      }
+    ]
     },
     { // 404必须在最后面
       path: '*',
