@@ -23,9 +23,6 @@
             </template>
           </el-upload>
         </div>
-        <!-- <el-form-item label="创建人" prop="creator">
-          <el-input v-model="addGiftsForm.creator"></el-input>
-        </el-form-item>-->
         <div>
           <div style="display:flex">
             <el-form-item label="标题" prop="title">
@@ -36,32 +33,56 @@
                 <el-option v-for="item of giftsClassList" :label="item" :value="item" :key="item"></el-option>
               </el-select>
             </el-form-item>
+            <div class="button" style=";margin-left:20px">
+              <el-button type="primary" @click.prevent="addRow()">添加规格</el-button>
+              <el-button type="primary" @click.prevent="batchDelete()">删除规格</el-button>
+            </div>
           </div>
-          <div style="display:flex">
-            <el-form-item label="名称" prop="spec_name">
-              <el-input v-model="addGiftsForm.spec_name"></el-input>
-            </el-form-item>
-            <el-form-item label="价格" prop="spec_price">
-              <el-input v-model.number="addGiftsForm.spec_price"></el-input>
-            </el-form-item>
-            <el-form-item label="虚拟币单价" prop="spec_coin">
-              <el-input v-model.number="addGiftsForm.spec_coin"></el-input>
-            </el-form-item>
-          </div>
-          <div style="display:flex">
-            <el-form-item label="库存" prop="spec_number">
-              <el-input v-model.number="addGiftsForm.spec_number"></el-input>
-            </el-form-item>
-            <el-form-item label="规格说明" prop="spec_content">
-              <el-input v-model.number="addGiftsForm.spec_content"></el-input>
-            </el-form-item>
+          <div class="table">
+            <el-table
+              :data="tableData"
+              ref="multipleTable"
+              tooltip-effect="dark"
+              border
+              stripe
+              style="width:900px"
+              @selection-change="handleSelectionChange"
+            >
+              <el-table-column type="selection" width="45" align="center"></el-table-column>
+              <el-table-column label="序号" type="index" width="60" align="center"></el-table-column>
+              <el-table-column label="名称" align="center">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.name"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column label="价格">
+                <template slot-scope="scope">
+                  <el-input v-model.number="scope.row.price"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column label="虚拟币单价">
+                <template slot-scope="scope">
+                  <el-input v-model.number="scope.row.coin"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column label="礼品数量">
+                <template slot-scope="scope">
+                  <el-input v-model.number="scope.row.number"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column label="礼品规格">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.content"></el-input>
+                </template>
+              </el-table-column>
+            </el-table>
           </div>
         </div>
       </div>
       <el-upload
-       accept="turns/jpeg, turns/gif, turns/png"
-       action="/api/appfile/appfile/"
-       :headers="headers"
+        accept="turns/jpeg, turns/gif, turns/png"
+        action="/api/appfile/appfile/"
+        :headers="headers"
         list-type="picture-card"
         :on-preview="handlePictureCardPreview"
         :on-remove="handleRemove"
@@ -74,25 +95,14 @@
       </el-dialog>
 
       <el-form-item label="礼品说明" prop="content" style="margin-top:10px">
-        <el-input v-model="addGiftsForm.content" type="textarea" :rows="5"   placeholder="请输入礼品说明"></el-input>
+        <el-input v-model="addGiftsForm.content" type="textarea" :rows="5" placeholder="请输入礼品说明"></el-input>
       </el-form-item>
       <div style="text-align:right;">
         <el-button @click="cancel">取消</el-button>
-        <el-button type="primary" @click="submitForm('addGiftsForm')">提交</el-button>
+        <el-button type="primary" @click="submitForm('addGiftsForm','tableData')">提交</el-button>
       </div>
     </el-form>
   </div>
-  <!-- <div class="block" style="text-align: right;margin-top:10px">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="currentPage"
-        :page-sizes="pageSizeList"
-        :page-size="pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="giftList.length"
-      ></el-pagination>
-  </div>-->
 </template>
 
 <script>
@@ -100,30 +110,41 @@ import {
   viewGifts,
   addGifts,
   viewGiftsClass,
-  viewGiftsSpecs
+  viewGiftsSpecs,
+  addGiftSpecs
 } from "@/api/gift";
 import { getToken } from "@/utils/auth";
 export default {
   data() {
     return {
+      tableData: [
+        {
+         // rowNum: "",
+          price: null,
+          coin: null,
+          name: null,
+          content: null,
+          number: null
+        }
+      ],
+      multipleSelection: [],
+
+      selectlistRow: [],
+
       giftList: [],
       giftsClassList: [],
-      dialogImageUrl: '',
+      giftsSpecsList: [],
+      dialogImageUrl: "",
       dialogVisible: false,
+      dialogShow1: false,
       addGiftsForm: {
-        //  creator: null,
         category: null,
-        spec_name: null,
-        title: null,
+      title: null,
         picture: null,
-        turns:null,
-        spec_price: null,
-        spec_content: null,
+        turns: null,
         content: null,
-        spec_coin: null
-      },
-
-      rules: {
+     },
+     rules: {
         spec_number: [
           {
             pattern: /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/,
@@ -133,17 +154,49 @@ export default {
         ]
       },
       SRC: "",
-      SRC1:"",
+      SRC1: "",
       headers: {
         Authorization: `JWT ${getToken()}`
       }
-      //  currentPage: 1,
-      // pageSize: 20,
-      // pageSizeList: [10, 20, 50, 100]
     };
   },
 
   methods: {
+    addRow() {
+      var list = {
+        //rowNum: "",
+        name: null,
+        price: null,
+        coin: null,
+        number: null,
+        content: null
+      };
+      this.tableData.push(list);
+      // console.log("11111");
+      // console.log(this.tableData);
+    },
+    // 删除方法
+    // 删除选中行
+    batchDelete() {
+      let multData = this.multipleSelection;
+      let tableData = this.tableData;
+      let multDataLen = multData.length;
+      let tableDataLen = tableData.length;
+      for (let i = 0; i < multDataLen; i++) {
+        for (let y = 0; y < tableDataLen; y++) {
+          if (JSON.stringify(tableData[y]) == JSON.stringify(multData[i])) {
+            //判断是否相等，相等就删除
+            this.tableData.splice(y, 1);
+          }
+        }
+      }
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+      //  console.log('11111')
+      //  console.log( this.multipleSelection)
+    },
+
     handleRemove(file, fileList) {
       console.log(file, fileList);
     },
@@ -161,48 +214,45 @@ export default {
         this.giftsClassList = [...data.msg];
       });
     },
-
-    // resetForm(formName) {
-    //   this.$refs[formName].resetFields();
-    // },
+    openDialog(Type) {
+      if (Type === 1) {
+        this.dialogShow1 = true;
+      }
+    },
     //监听上传图片成功，成功后赋值给form ，并且赋值给图片src显示图片
     handleSuccess(response, file, fileList) {
       if (response.status == 0) {
-
         this.SRC = this.$store.state.BASE_URL + response.msg;
         this.addGiftsForm["picture"] = response.msg;
-         console.log( this.addGiftsForm["picture"] )
         // this.addGiftsForm.image_id = response.id;
       } else {
         this.$message.error(response.msg);
       }
     },
-      handleSuccess1(response, file, fileList) {
-         const urls = fileList.map(item=>item.response.msg).join(",");
-        //  console.log("000");
-        //  console.log(urls);
-      
+    handleSuccess1(response, file, fileList) {
+      const urls = fileList.map(item => item.response.msg).join(",");
       if (response.status == 0) {
-       
         this.SRC1 = this.$store.state.BASE_URL + urls;
-        
         this.addGiftsForm["turns"] = urls;
-       console.log('111111')
-       console.log(this.addGiftsForm["turns"])
         // this.addGiftsForm.image_id = response.id;
       } else {
         this.$message.error(response.msg);
       }
     },
     //添加礼品
-    submitForm(addGiftsForm) {
-      console.log("111111");
-      console.log(this.addGiftsForm);
-      addGifts(this.addGiftsForm).then(({ data }) => {
+    submitForm(addGiftsForm, tableData) {
+      addGifts({
+        title:this.addGiftsForm.title,
+        category:this.addGiftsForm.category,
+        content:this.addGiftsForm.content,
+        picture:this.addGiftsForm.picture,
+          turns:this.addGiftsForm.turns,
+        specifications:this.tableData,
+      }).then(({ data }) => {
         if (data.status === 0) {
           this.$message.success(data.msg);
-          this.dialogShow2 = false;
-          this.addGiftsForm = {};
+         this.addGiftsForm = {};
+         this.SRC = "";
           this.getviewGifts();
         } else {
           this.$message.error(data.msg);
@@ -212,26 +262,10 @@ export default {
       });
     },
     cancel() {
-      //this.dialogShow2 = false;
       this.addGiftsForm = [];
       this.SRC = "";
-      
     }
-    //   // 分页
-    // handleSizeChange(val) {
-    //   this.pageSize = val;
-
-    // },
-    // handleCurrentChange(currentPage) {
-    //   this.currentPage = currentPage;
-
-    // },
-    // //解决索引旨在当前页排序的问题，增加函数自定义索引序号
-    // indexMethod(index) {
-    //   return (this.currentPage - 1) * this.pageSize + index + 1;
-    // },
   },
-
   created() {
     this.getviewGifts();
     this.getGiftsClass();

@@ -12,10 +12,27 @@ export function viewGiftsSpecs(){
   return AXIOS.get('/product/specifications/')
 }
 //上传附件
-export function uploadAttachment(params) {
-    return AXIOS.post('/appfile/appfile/', params)
+export function uploadAttachment(data) {
+    return AXIOS.post('/appfile/appfile/',data)
   }
   //添加礼品
-  export function addGifts(params) {
-    return AXIOS.post('/product/product/', params)
+  export function addGifts(data) {
+    return AXIOS.post('/product/product/', data, {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8'
+      },
+      transformRequest: [params => {
+        return JSON.stringify(params)
+      }]
+    })
   }  
+  //删除礼品
+export function deleteGift(data) {
+  return AXIOS.post('/product/product/?delete', data)
+}
+//添加礼品规格
+export function addGiftSpecs(data) {
+  return AXIOS.post('/product/specifications/', data)
+}  
+
+

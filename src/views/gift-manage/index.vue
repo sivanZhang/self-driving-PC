@@ -3,6 +3,18 @@
     <el-row :gutter="30">
       <el-col :span="6" v-for="(item,index) in giftList" :key="index">
         <el-card shadow="hover" :body-style="{ padding: '0px' }">
+          <div class="dropdow">
+            <el-dropdown placement="bottom" trigger="click">
+              <el-button type="text" style="color:#333">
+                <i class="el-icon-more"></i>
+              </el-button>
+              <el-dropdown-menu slot="dropdown" style="margin-top:0px">
+                <el-dropdown-item
+                  @click.native="delGift(item)"
+                >删除</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
           <div class=".el-card__header">
             <div slot="header" class="box-card-header">
               <el-image
@@ -16,9 +28,6 @@
                 </div>
               </el-image>
             </div>
-            <!-- <div slot="header" class="box-card-header">
-              <img src="../../icons/bkground.jpg" class="image" />
-            </div>-->
           </div>
           <div style="padding: 18px;">
             <p>创建人：{{item.creator_info.username}}</p>
@@ -27,19 +36,13 @@
                 <p class="subtitle">分类</p>
                 <div>{{item.category}}</div>
               </el-col>
-              <el-col :span="14">
-                <p class="subtitle">名称</p>
-                <div style="display:flex;">
-                  <div>{{item.specifications.name}}</div>
-                </div>
-              </el-col>
-              <el-col :span="8">
-                <p class="subtitle">数量</p>
-                <div>{{item.specifications.num}}</div>
-              </el-col>
               <el-col :span="15">
                 <p class="subtitle">标题</p>
                 <div>{{item.title}}</div>
+              </el-col>
+               <el-col :span="8">
+                <p class="subtitle">礼品说明</p>
+                <div>{{item.content}}</div>
               </el-col>
             </el-row>
           </div>
@@ -65,7 +68,8 @@ import {
   viewGifts,
   addGifts,
   viewGiftsClass,
-  viewGiftsSpecs
+  viewGiftsSpecs,
+  deleteGift
 } from "@/api/gift";
 import { getToken } from "@/utils/auth";
 export default {
@@ -74,26 +78,6 @@ export default {
       giftList: [],
       giftsClassList: [],
       dialogShow2: false,
-      addGiftsForm: {
-        //  creator: null,
-        category: null,
-        spec_name: null,
-        title: null,
-        picture: null,
-        spec_price: null,
-        spec_content: null,
-        content: null
-      },
-
-      rules: {
-        spec_number: [
-          {
-            pattern: /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/,
-            message: "请输入数字",
-            trigger: "change"
-          }
-        ]
-      },
       SRC: "",
       headers: {
         Authorization: `JWT ${getToken()}`
@@ -115,11 +99,24 @@ export default {
         this.giftsClassList = [...data.msg];
       });
     },
-
-    
-    // resetForm(formName) {
-    //   this.$refs[formName].resetFields();
-    // },
+    //删除
+    delGift(item) {
+      this.$confirm("此操作将永久删除该用户，是否继续?", "提示", {
+        confirmButtonText: "确认",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        deleteGift({method: "delete", ids:item.id  }).then(({ data }) => {
+          console.log(data.msg);
+          if (data.status === 0) {
+            this.$message.success(data.msg);
+             this.getviewGifts();
+          } else {
+            this.$message.error(data.msg);
+          }
+        });
+      });
+    },
     //监听上传图片成功，成功后赋值给form ，并且赋值给图片src显示图片
     handleSuccess(response, file, fileList) {
       if (response.status == 0) {
@@ -129,8 +126,8 @@ export default {
       } else {
         this.$message.error(response.msg);
       }
-    },
-    
+    }
+
     //   // 分页
     // handleSizeChange(val) {
     //   this.pageSize = val;
@@ -187,5 +184,11 @@ p {
   align-items: center;
   font-size: 56px;
   background: #dcdfe6;
+}
+.dropdow {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  z-index: 3;
 }
 </style>
