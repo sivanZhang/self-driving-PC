@@ -94,10 +94,22 @@
         <img width="100%" :src="dialogImageUrl" alt />
       </el-dialog>
 
-      <el-form-item label="礼品说明" prop="content" style="margin-top:10px">
+      <div>
+        <quill-editor
+          v-model="content"
+          ref="myQuillEditor"
+          :options="editorOption"
+          @blur="onEditorBlur($event)"
+          @focus="onEditorFocus($event)"
+          @ready="onEditorReady($event)"
+          style="height:150px"
+        ></quill-editor>
+        {{content}}
+      </div>
+      <!-- <el-form-item label="礼品说明" prop="content" style="margin-top:10px">
         <el-input v-model="addGiftsForm.content" type="textarea" :rows="5" placeholder="请输入礼品说明"></el-input>
-      </el-form-item>
-      <div style="text-align:right;">
+      </el-form-item>-->
+      <div style="text-align:right;margin-top:50px">
         <el-button @click="cancel">取消</el-button>
         <el-button type="primary" @click="submitForm('addGiftsForm','tableData')">提交</el-button>
       </div>
@@ -114,12 +126,25 @@ import {
   addGiftSpecs
 } from "@/api/gift";
 import { getToken } from "@/utils/auth";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
+import { quillEditor } from "vue-quill-editor";
 export default {
+  computed: {
+    editor() {
+      return this.$refs.myQuillEditor.quill;
+    }
+  },
   data() {
     return {
+      content: "",
+      editorOption: {
+        // some quill options
+      },
       tableData: [
         {
-         // rowNum: "",
+          // rowNum: "",
           price: null,
           coin: null,
           name: null,
@@ -139,12 +164,12 @@ export default {
       dialogShow1: false,
       addGiftsForm: {
         category: null,
-      title: null,
+        title: null,
         picture: null,
         turns: null,
         content: null,
-     },
-     rules: {
+      },
+      rules: {
         spec_number: [
           {
             pattern: /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/,
@@ -160,8 +185,24 @@ export default {
       }
     };
   },
-
+  components: {
+    quillEditor
+  },
+  name: "extra-audit",
   methods: {
+    onEditorBlur(quill) {
+      // console.log("editor blur!", quill);
+    },
+    onEditorFocus(quill) {
+      // console.log("editor focus!", quill);
+    },
+    onEditorReady(quill) {
+      //  console.log("editor ready!", quill);
+    },
+    onEditorChange({ quill, html, text }) {
+      // console.log("editor change!", quill, html, text);
+      this.content = html;
+    },
     addRow() {
       var list = {
         //rowNum: "",
@@ -172,8 +213,6 @@ export default {
         content: null
       };
       this.tableData.push(list);
-      // console.log("11111");
-      // console.log(this.tableData);
     },
     // 删除方法
     // 删除选中行
@@ -233,7 +272,7 @@ export default {
       const urls = fileList.map(item => item.response.msg).join(",");
       if (response.status == 0) {
         this.SRC1 = this.$store.state.BASE_URL + urls;
-        this.addGiftsForm["turns"] = urls;
+        this.addGiftsForm["turns"] = urls?urls:"null";
         // this.addGiftsForm.image_id = response.id;
       } else {
         this.$message.error(response.msg);
@@ -241,18 +280,31 @@ export default {
     },
     //添加礼品
     submitForm(addGiftsForm, tableData) {
-      addGifts({
-        title:this.addGiftsForm.title,
-        category:this.addGiftsForm.category,
-        content:this.addGiftsForm.content,
-        picture:this.addGiftsForm.picture,
-          turns:this.addGiftsForm.turns,
-        specifications:this.tableData,
-      }).then(({ data }) => {
+      let gift = {};
+      gift = {
+        title: this.addGiftsForm.title,
+        category: this.addGiftsForm.category,
+        content: this.content,
+        picture: this.addGiftsForm.picture,
+        turns: this.addGiftsForm.turns,
+        specifications: this.tableData
+      };
+      console.log(this.addGiftsForm.turns);
+      if (gift.turns == null) {
+        delete gift.turns;
+      }
+      //delete gift.specifications
+      if (gift.specifications ==null || gift.specifications.length===0) {
+        delete gift.specifications;
+      }
+    //  console.log(gift);
+      addGifts(gift).then(({ data }) => {
         if (data.status === 0) {
           this.$message.success(data.msg);
          this.addGiftsForm = {};
          this.SRC = "";
+          this.content="";
+         this.tableData=[];
           this.getviewGifts();
         } else {
           this.$message.error(data.msg);
@@ -264,7 +316,13 @@ export default {
     cancel() {
       this.addGiftsForm = [];
       this.SRC = "";
+      this.content="";
+      this.tableData=[];
+      
     }
+  },
+  mounted() {
+    console.log("this is current quill instance object", this.editor);
   },
   created() {
     this.getviewGifts();

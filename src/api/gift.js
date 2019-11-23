@@ -8,8 +8,8 @@ export function viewGiftsClass(){
   return AXIOS.get('/product/category/')
 }
 //查看礼品规格
-export function viewGiftsSpecs(){
-  return AXIOS.get('/product/specifications/')
+export function viewGiftsSpecs(params){
+  return AXIOS.get('/product/specifications/',{params})
 }
 //上传附件
 export function uploadAttachment(data) {

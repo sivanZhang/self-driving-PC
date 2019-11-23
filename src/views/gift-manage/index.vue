@@ -17,16 +17,20 @@
           </div>
           <div class=".el-card__header">
             <div slot="header" class="box-card-header">
+                <router-link :to="{name:'gift-detail',params:{id:item.id},query:{type:item.pro_type}}">
               <el-image
                 class="mini-image"
                 :src="item.picture?$store.state.BASE_URL+item.picture:''"
                 fit="cover"
                 style=" width: 100%; height: auto;"
+               
               >
+                <!-- <router-link :to="`/gift/gift-detail/${item.id}`">礼品详情</router-link>  -->
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture" style="color:#909399"></i>
                 </div>
               </el-image>
+                </router-link>
             </div>
           </div>
           <div style="padding: 18px;">
@@ -40,10 +44,10 @@
                 <p class="subtitle">标题</p>
                 <div>{{item.title}}</div>
               </el-col>
-               <el-col :span="8">
+               <!-- <el-col :span="8">
                 <p class="subtitle">礼品说明</p>
-                <div>{{item.content}}</div>
-              </el-col>
+                 <div v-html="item.content"></div>
+              </el-col> -->
             </el-row>
           </div>
         </el-card>
@@ -107,7 +111,7 @@ export default {
         type: "warning"
       }).then(() => {
         deleteGift({method: "delete", ids:item.id  }).then(({ data }) => {
-          console.log(data.msg);
+          //console.log(data.msg);
           if (data.status === 0) {
             this.$message.success(data.msg);
              this.getviewGifts();

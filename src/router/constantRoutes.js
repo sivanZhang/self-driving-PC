@@ -30,6 +30,26 @@ export default [
     component: () =>
       import('@/views/login/signup'),
   },
+  {
+    path: '/gift',
+    component: Layout,
+    redirect: 'noRedirect',
+    meta: {
+      title: '礼品管理',
+      icon: 'tree-table',
+    },
+    hidden: true,
+    children: [{
+      path: 'gift-detail/:id',
+      name: 'gift-detail',
+      component: () =>
+        import('@/views/gift/gift-detail'),
+      meta: {
+        title: '礼品详情',
+        icon: 'tree',
+      }
+    }]
+  },
  
   {
     path: '/404',
