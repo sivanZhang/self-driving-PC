@@ -1,7 +1,7 @@
 import AXIOS from '@/libs/request'
 //查看礼品
-export function viewGifts(){
-    return AXIOS.get('/product/product/')
+export function viewGifts(params){
+    return AXIOS.get('/product/product/',{params})
 }
 //查看礼品分类
 export function viewGiftsClass(){
