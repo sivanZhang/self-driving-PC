@@ -10,7 +10,6 @@
               fit="cover"
               style=" width: 100%; height: auto;"
             >
-              <!-- <router-link :to="`/gift/gift-detail/${item.id}`">礼品详情</router-link>  -->
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture" style="color:#909399"></i>
               </div>
@@ -18,28 +17,29 @@
           </el-carousel-item>
         </el-carousel>
       </el-col>
+      <el-col :span="8">
+        <label>标题: {{giftList2}}</label>
+      </el-col>
       <el-col :span="14">
-        <el-table :data="giftSpeList" border >
-          <el-table-column prop="id" label="规格id" width="180"></el-table-column>
-          <el-table-column prop="name" label="礼品名称" width="180"></el-table-column>
+        <el-table :data="giftSpeList" border style="margin-top:5px">
+          <el-table-column prop="id" label="规格id"></el-table-column>
+          <el-table-column prop="name" label="礼品名称"></el-table-column>
           <el-table-column prop="price" label="价格"></el-table-column>
           <el-table-column prop="coin" label="虚拟币价格"></el-table-column>
+          <el-table-column prop="num" label="库存"></el-table-column>
           <el-table-column prop="content" label="礼品描述"></el-table-column>
         </el-table>
       </el-col>
     </el-row>
-     
-      <el-col :span="24" v-for="(item,index) in giftList1" :key="index">
-        <el-card >
-         
-               <el-col :span="24">
-                <p class="subtitle">礼品说明：</p>
-                 <div v-html="item.content"></div>
-              </el-col>
-         
-        </el-card>
-      </el-col>
-  
+
+    <el-col :span="24" v-for="(item,index) in giftList1" :key="index">
+      <el-card>
+        <el-col :span="24">
+          <p class="subtitle">礼品说明：</p>
+          <div v-html="item.content"></div>
+        </el-col>
+      </el-card>
+    </el-col>
   </div>
 </template>
 
@@ -52,12 +52,12 @@ export default {
   data() {
     return {
       giftList: [],
-       giftList1: [],
+      giftList1: [],
+      giftList2: [],
       giftSpeList: [],
       id: this.$route.params.id
     };
   },
-
   methods: {
     //轮播图
     getviewGifts() {
@@ -65,16 +65,14 @@ export default {
       viewGifts({ product_id: id }).then(({ data }) => {
         let list = data.msg[0].turns;
         this.giftList = list;
-        // console.log("11111");
-        // console.log(this.giftList);
+        let list1 = data.msg[0].title;
+        this.giftList2 = list1;
       });
     },
-     getviewGifts1() {
+    getviewGifts1() {
       var id = this.id;
       viewGifts({ product_id: id }).then(({ data }) => {
         this.giftList1 = [...data.msg];
-        console.log("11111");
-        console.log(this.giftList1);
       });
     },
     //查看礼品规格
@@ -88,7 +86,7 @@ export default {
   created() {
     this.getviewGifts();
     this.getGiftsSpecs();
-     this.getviewGifts1()
+    this.getviewGifts1();
   }
 };
 </script>
