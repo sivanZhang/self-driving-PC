@@ -48,7 +48,18 @@ export default [
         title: '礼品详情',
         icon: 'tree',
       }
-    }]
+    },
+    {
+      path: 'add-gifts/:id',
+      name: 'alter-gifts',
+      component: () =>
+        import('@/views/add-gifts/index'),
+      meta: {
+        title: '礼品修改',
+        icon: 'tree',
+      }
+    }
+  ]
   },
  
   {

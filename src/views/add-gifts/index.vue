@@ -3,6 +3,7 @@
     <el-form :model="addGiftsForm" status-icon ref="addGiftsForm" label-width="90px">
       <div style="display:flex">
         <div>
+          <!-- id{{id}} -->
           <el-upload
             accept="picture/jpeg, picture/gif, picture/png"
             ref="upload"
@@ -34,7 +35,14 @@
               </el-select>
             </el-form-item>
             <div class="button" style=";margin-left:20px">
-              <el-button type="primary" @click.prevent="addRow()">添加规格</el-button>
+              <!-- <el-button type="primary" @click.prevent="addRow()">添加规格{{id?'修改':'新建'}}</el-button> -->
+
+              <el-button
+                type="primary"
+                :disabled="isdisabledFn"
+                @click.prevent="addRow()"
+              >{{id?'添加规格':'添加规格'}}</el-button>
+              <!-- <el-button type="primary" @click.prevent="addRow()">{{id?'禁用按钮':'添加规格'}}</el-button> -->
               <el-button type="primary" @click.prevent="batchDelete()">删除规格</el-button>
             </div>
           </div>
@@ -111,7 +119,7 @@
       </el-form-item>-->
       <div style="text-align:right;margin-top:50px">
         <el-button @click="cancel">取消</el-button>
-        <el-button type="primary" @click="submitForm('addGiftsForm','tableData')">提交</el-button>
+        <el-button type="primary" @click="submitForm('addGiftsForm','tableData')">{{id?'修改':'新建'}}</el-button>
       </div>
     </el-form>
   </div>
@@ -123,7 +131,8 @@ import {
   addGifts,
   viewGiftsClass,
   viewGiftsSpecs,
-  addGiftSpecs
+  addGiftSpecs,
+  alterGift
 } from "@/api/gift";
 import { getToken } from "@/utils/auth";
 import "quill/dist/quill.core.css";
@@ -131,6 +140,7 @@ import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import { quillEditor } from "vue-quill-editor";
 export default {
+  name: "alter-gifts",
   computed: {
     editor() {
       return this.$refs.myQuillEditor.quill;
@@ -138,6 +148,7 @@ export default {
   },
   data() {
     return {
+      id: this.$route.params.id || "",
       content: "",
       editorOption: {
         // some quill options
@@ -167,7 +178,7 @@ export default {
         title: null,
         picture: null,
         turns: null,
-        content: null,
+        content: null
       },
       rules: {
         spec_number: [
@@ -189,20 +200,32 @@ export default {
     quillEditor
   },
   name: "extra-audit",
+  //判断能否添加规格
+  computed: {
+    isdisabledFn() {
+      if (this.id != "") {
+        return (this.isdisabled = true);
+      } else {
+        return (this.isdisabled = false);
+      }
+    }
+  },
+
   methods: {
-    onEditorBlur(quill) {
-      // console.log("editor blur!", quill);
-    },
-    onEditorFocus(quill) {
-      // console.log("editor focus!", quill);
-    },
-    onEditorReady(quill) {
-      //  console.log("editor ready!", quill);
-    },
+    //修改礼品
+    // modifyGift() {
+    //   var id = this.id;
+    //   // console.log(id);
+    //   // console.log("111111");
+    // },
+
+    onEditorBlur(quill) {},
+    onEditorFocus(quill) {},
+    onEditorReady(quill) {},
     onEditorChange({ quill, html, text }) {
-      // console.log("editor change!", quill, html, text);
       this.content = html;
     },
+    //添加行
     addRow() {
       var list = {
         //rowNum: "",
@@ -272,61 +295,105 @@ export default {
       const urls = fileList.map(item => item.response.msg).join(",");
       if (response.status == 0) {
         this.SRC1 = this.$store.state.BASE_URL + urls;
-        this.addGiftsForm["turns"] = urls?urls:"null";
+        this.addGiftsForm["turns"] = urls ? urls : "null";
         // this.addGiftsForm.image_id = response.id;
       } else {
         this.$message.error(response.msg);
       }
     },
-    //添加礼品
+    //添加礼品，修改礼品
     submitForm(addGiftsForm, tableData) {
-      let gift = {};
-      gift = {
-        title: this.addGiftsForm.title,
-        category: this.addGiftsForm.category,
-        content: this.content,
-        picture: this.addGiftsForm.picture,
-        turns: this.addGiftsForm.turns,
-        specifications: this.tableData
-      };
-      console.log(this.addGiftsForm.turns);
-      if (gift.turns == null) {
-        delete gift.turns;
-      }
-      //delete gift.specifications
-      if (gift.specifications ==null || gift.specifications.length===0) {
-        delete gift.specifications;
-      }
-    //  console.log(gift);
-      addGifts(gift).then(({ data }) => {
-        if (data.status === 0) {
-          this.$message.success(data.msg);
-         this.addGiftsForm = {};
-         this.SRC = "";
-          this.content="";
-         this.tableData=[];
-          this.getviewGifts();
-        } else {
-          this.$message.error(data.msg);
-          this.addGiftsForm = {};
-          this.getviewGifts();
+      if (this.id) {
+        let gift = {};
+        gift = {
+          method: "put",
+          id: this.id,
+          title: this.addGiftsForm.title,
+          category: this.addGiftsForm.category,
+          content: this.content,
+          picture: this.addGiftsForm.picture,
+          turns: this.addGiftsForm.turns
+        };
+        if (gift.turns == null) {
+          delete gift.turns;
         }
-      });
+        if (gift.title == null) {
+          delete gift.title;
+        }
+        if (gift.category == null) {
+          delete gift.category;
+        }
+        if (gift.content == "") {
+          delete gift.content;
+        }
+        if (gift.picture == null) {
+          delete gift.picture;
+        }
+        //   console.log('11111111111');
+        //  console.log(gift);
+
+        alterGift(gift).then(({ data }) => {
+          if (data.status === 0) {
+            this.$message.success(data.msg);
+            this.addGiftsForm = {};
+            this.SRC = "";
+            this.content = "";
+            this.tableData = [];
+            this.getviewGifts();
+          } else {
+            this.$message.error(data.msg);
+            this.addGiftsForm = {};
+            this.getviewGifts();
+          }
+        });
+      } else {
+        let gift = {};
+        gift = {
+          title: this.addGiftsForm.title,
+          category: this.addGiftsForm.category,
+          content: this.content,
+          picture: this.addGiftsForm.picture,
+          turns: this.addGiftsForm.turns,
+          specifications: this.tableData
+        };
+        if (gift.turns == null) {
+          delete gift.turns;
+        }
+        //delete gift.specifications
+        if (gift.specifications == null || gift.specifications.length === 0) {
+          delete gift.specifications;
+        }
+        //  console.log(gift);
+        addGifts(gift).then(({ data }) => {
+          if (data.status === 0) {
+            this.$message.success(data.msg);
+            this.addGiftsForm = {};
+            this.SRC = "";
+            this.content = "";
+            this.tableData = [];
+            this.getviewGifts();
+          } else {
+            this.$message.error(data.msg);
+            this.addGiftsForm = {};
+            this.getviewGifts();
+          }
+        });
+      }
     },
     cancel() {
       this.addGiftsForm = [];
       this.SRC = "";
-      this.content="";
-      this.tableData=[];
-      
+      this.content = "";
+      this.tableData = [];
     }
   },
   mounted() {
-    console.log("this is current quill instance object", this.editor);
+    // console.log("this is current quill instance object", this.editor);
   },
   created() {
     this.getviewGifts();
     this.getGiftsClass();
+    // this.modifyGift();
   }
 };
 </script>

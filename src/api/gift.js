@@ -26,6 +26,17 @@ export function uploadAttachment(data) {
       }]
     })
   }  
+  //修改礼品
+  export function alterGift(data) {
+    return AXIOS.post('/product/product/?put', data,{
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8'
+      },
+      transformRequest: [params => {
+        return JSON.stringify(params)
+      }]
+    })
+  }
   //删除礼品
 export function deleteGift(data) {
   return AXIOS.post('/product/product/?delete', data)

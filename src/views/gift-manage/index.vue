@@ -9,28 +9,32 @@
                 <i class="el-icon-more"></i>
               </el-button>
               <el-dropdown-menu slot="dropdown" style="margin-top:0px">
-                <el-dropdown-item
-                  @click.native="delGift(item)"
-                >删除</el-dropdown-item>
+                <router-link
+                  :to="{name:'alter-gifts',params:{id:item.id},query:{type:item.pro_type}}"
+                >
+                  <el-dropdown-item>修改</el-dropdown-item>
+                </router-link>
+                <el-dropdown-item @click.native="delGift(item)">删除</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
           <div class=".el-card__header">
             <div slot="header" class="box-card-header">
-                <router-link :to="{name:'gift-detail',params:{id:item.id},query:{type:item.pro_type}}">
-              <el-image
-                class="mini-image"
-                :src="item.picture?$store.state.BASE_URL+item.picture:''"
-                fit="cover"
-                style=" width: 100%; height: auto;"
-               
+              <router-link
+                :to="{name:'gift-detail',params:{id:item.id},query:{type:item.pro_type}}"
               >
-                <!-- <router-link :to="`/gift/gift-detail/${item.id}`">礼品详情</router-link>  -->
-                <div slot="error" class="image-slot">
-                  <i class="el-icon-picture" style="color:#909399"></i>
-                </div>
-              </el-image>
-                </router-link>
+                <el-image
+                  class="mini-image"
+                  :src="item.picture?$store.state.BASE_URL+item.picture:''"
+                  fit="cover"
+                  style=" width: 100%; height: auto;"
+                >
+                  <!-- <router-link :to="`/gift/gift-detail/${item.id}`">礼品详情</router-link>  -->
+                  <div slot="error" class="image-slot">
+                    <i class="el-icon-picture" style="color:#909399"></i>
+                  </div>
+                </el-image>
+              </router-link>
             </div>
           </div>
           <div style="padding: 18px;">
@@ -43,11 +47,13 @@
               <el-col :span="15">
                 <p class="subtitle">标题</p>
                 <div>{{item.title}}</div>
+
+                <!-- <router-link
+                  :to="{name:'alter-gifts',params:{id:item.id},query:{type:item.pro_type}}"
+                >
+                  <el-button>修改</el-button>
+                </router-link> -->
               </el-col>
-               <!-- <el-col :span="8">
-                <p class="subtitle">礼品说明</p>
-                 <div v-html="item.content"></div>
-              </el-col> -->
             </el-row>
           </div>
         </el-card>
@@ -110,11 +116,11 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(() => {
-        deleteGift({method: "delete", ids:item.id  }).then(({ data }) => {
+        deleteGift({ method: "delete", ids: item.id }).then(({ data }) => {
           //console.log(data.msg);
           if (data.status === 0) {
             this.$message.success(data.msg);
-             this.getviewGifts();
+            this.getviewGifts();
           } else {
             this.$message.error(data.msg);
           }
