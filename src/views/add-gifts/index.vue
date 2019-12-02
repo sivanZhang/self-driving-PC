@@ -34,9 +34,7 @@
                 <el-option v-for="item of giftsClassList" :label="item" :value="item" :key="item"></el-option>
               </el-select>
             </el-form-item>
-            <div class="button" style=";margin-left:20px">
-              <!-- <el-button type="primary" @click.prevent="addRow()">添加规格{{id?'修改':'新建'}}</el-button> -->
-
+            <div class="button" style="margin-left:20px">
               <el-button
                 type="primary"
                 :disabled="isdisabledFn"
@@ -117,7 +115,7 @@
       <!-- <el-form-item label="礼品说明" prop="content" style="margin-top:10px">
         <el-input v-model="addGiftsForm.content" type="textarea" :rows="5" placeholder="请输入礼品说明"></el-input>
       </el-form-item>-->
-      <div style="text-align:right;margin-top:50px">
+      <div class="btn">
         <el-button @click="cancel">取消</el-button>
         <el-button type="primary" @click="submitForm('addGiftsForm','tableData')">{{id?'修改':'新建'}}</el-button>
       </div>
@@ -398,39 +396,8 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.el-card {
-  position: relative;
-  margin: 0 5px 30px 5px;
-  width: 300px;
-}
-.box-card-header {
-  position: relative;
-  height: 162px;
-  overflow: hidden;
-}
-.el-card__header {
-  padding: 0px 0px;
-}
-
-p {
-  font-size: 12px;
-  color: #909399;
-  margin: 10px 0 5px;
-}
-.subtitle {
-  margin: 15px 0 5px;
-}
-.mini-image {
-  cursor: pointer;
-  overflow: hidden;
-  opacity: 1;
-}
-.image-slot {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 56px;
-  background: #dcdfe6;
+.btn {
+  text-align: right;
+  margin-top: 50px;
 }
 </style>

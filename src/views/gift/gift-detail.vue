@@ -8,12 +8,7 @@
               class="mini-image"
               :src="item?$store.state.BASE_URL+item:''"
               fit="cover"
-              style=" width: 100%; height: auto;"
-            >
-              <div slot="error" class="image-slot">
-                <i class="el-icon-picture" style="color:#909399"></i>
-              </div>
-            </el-image>
+               ></el-image>
           </el-carousel-item>
         </el-carousel>
       </el-col>
@@ -92,4 +87,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.mini-image {
+  width: 100%;
+  height: auto;
+}
 </style>
