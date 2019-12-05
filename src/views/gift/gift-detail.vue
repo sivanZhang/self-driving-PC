@@ -12,17 +12,116 @@
       <el-col :span="6">
         <label>标题: {{giftList2}}</label>
       </el-col>
-      <el-col :span="8">
+      <el-col :span="8" style="padding-left:280px;">
         <el-button type="primary" icon="el-icon-plus" @click="openDialog(1)">添加规格</el-button>
       </el-col>
       <el-col :span="14">
         <el-table :data="giftSpeList" border style="margin-top:5px">
           <el-table-column prop="id" label="规格id"></el-table-column>
-          <el-table-column prop="name" label="礼品名称"></el-table-column>
-          <el-table-column prop="price" label="价格"></el-table-column>
-          <el-table-column prop="coin" label="虚拟币价格"></el-table-column>
-          <el-table-column prop="num" label="库存"></el-table-column>
-          <el-table-column prop="content" label="礼品描述"></el-table-column>
+          <el-table-column prop="name" label="礼品名称">
+            <template slot-scope="scope">
+              <el-input
+                size="small"
+                v-model="scope.row.name"
+                placeholder="请输入名称"
+                v-if="editing&&clickId === scope.row.id"
+                @change="showEditIcon"
+              >
+                <span>{{scope.row.name?scope.row.name:"-"}}</span>
+              </el-input>
+              <span v-if="!editing||clickId !== scope.row.id">{{scope.row.name?scope.row.name:"-"}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="price" label="价格">
+            <template slot-scope="scope">
+              <el-input
+                size="small"
+                v-model.number="scope.row.price"
+                placeholder="请输入价格"
+                v-if="editing&&clickId === scope.row.id"
+                @change="showEditIcon"
+              >
+                <span>{{scope.row.price?scope.row.price:"-"}}</span>
+              </el-input>
+              <span
+                v-if="!editing||clickId !== scope.row.id"
+              >{{scope.row.price?scope.row.price:"-"}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="coin" label="虚拟币价格">
+            <template slot-scope="scope">
+              <el-input
+                size="small"
+                v-model.number="scope.row.coin"
+                placeholder="虚拟币价格"
+                v-if="editing&&clickId === scope.row.id"
+                @change="showEditIcon"
+              >
+                <span>{{scope.row.coin?scope.row.coin:"-"}}</span>
+              </el-input>
+              <span v-if="!editing||clickId !== scope.row.id">{{scope.row.coin?scope.row.coin:"-"}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="num" label="库存">
+            <template slot-scope="scope">
+              <el-input
+                size="small"
+                v-model.number="scope.row.num"
+                placeholder="库存"
+                v-if="editing&&clickId === scope.row.id"
+                @change="showEditIcon"
+              >
+                <span>{{scope.row.num?scope.row.num:"-"}}</span>
+              </el-input>
+              <span v-if="!editing||clickId !== scope.row.id">{{scope.row.num?scope.row.num:"-"}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="content" label="礼品描述">
+            <template slot-scope="scope">
+              <el-input
+                size="small"
+                v-model="scope.row.content"
+                placeholder="礼品描述"
+                v-if="editing&&clickId === scope.row.id"
+                @change="showEditIcon"
+              >
+                <span>{{scope.row.content?scope.row.content:"-"}}</span>
+              </el-input>
+              <span
+                v-if="!editing||clickId !== scope.row.id"
+              >{{scope.row.content?scope.row.content:"-"}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" align="center" width="100px">
+            <template slot-scope="scope">
+              <el-tooltip effect="dark" content="修改" placement="top">
+                <el-button
+                  @click="editGiftSpecs(scope.row)"
+                  icon="el-icon-edit"
+                  type="text"
+                  style="color:blue"
+                  v-if="!editing||clickId !== scope.row.id"
+                />
+              </el-tooltip>
+              <el-tooltip effect="dark" content="确认" placement="top">
+                <el-button
+                  v-if="editing&&clickId === scope.row.id"
+                  type="text"
+                  icon="el-icon-check"
+                  style="color:green"
+                  @click="saveGiftSpecs(scope.$index,scope.row)"
+                />
+              </el-tooltip>
+              <!-- <el-tooltip effect="dark" content="删除" placement="top">
+                <el-button
+                  @click="deleteMaterial(scope.row.id)"
+                  icon="el-icon-delete"
+                  style="color:red"
+                  type="text"
+                />
+              </el-tooltip> -->
+            </template>
+          </el-table-column>
         </el-table>
       </el-col>
     </el-row>
@@ -63,7 +162,12 @@
 </template>
 
 <script>
-import { viewGifts, viewGiftsSpecs, addGiftSpecs } from "@/api/gift";
+import {
+  viewGifts,
+  viewGiftsSpecs,
+  addGiftSpecs,
+  alterGiftSpecs
+} from "@/api/gift";
 import { getToken } from "@/utils/auth";
 export default {
   name: "gift-detail",
@@ -71,6 +175,9 @@ export default {
   data() {
     return {
       dialogShow1: false,
+      editing: false,
+        row: null,
+       clickId: null,
       giftList: [],
       giftList1: [],
       giftList2: [],
@@ -160,6 +267,52 @@ export default {
     },
     cancel() {
       this.addSpecsForm = [];
+    },
+     //是否显示行内修改框
+    showEditIcon() {
+      this.iconShow = true;
+    },
+     //修改礼品规格
+    editGiftSpecs(row) {
+     
+      if (this.iconShow === true) {
+        this.$confirm("当前修改未保存", "注意", {
+
+          type: "warning"
+        });
+      } else {
+        this.editing = true;
+        this.clickId = row.id;
+        //   console.log('111111')
+       //  console.log(this.clickId)
+      }
+    },
+    //确认修改礼品规格
+    saveGiftSpecs(index, row) {
+      this.iconShow = false;
+
+      let specs = {
+        method: "put",
+        id: row.id,
+        name: row.name,
+        number: row.num,
+        price: row.price,
+        coin: row.coin,
+        content:row.content,
+
+      };
+    //  console.log('111111')
+    //      console.log(specs)
+      alterGiftSpecs(specs).then(({ data }) => {
+        if (data.status === 0) {
+          this.$message.success(data.msg);
+          this.getGiftsSpecs();
+      (this.editing = false);
+        } else {
+          this.$message.error(data.msg);
+        }
+      });
+     // console.log(dataMaterial)
     }
   },
   created() {

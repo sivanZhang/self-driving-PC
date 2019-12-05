@@ -45,5 +45,9 @@ export function deleteGift(data) {
 export function addGiftSpecs(data) {
   return AXIOS.post('/product/specifications/', data)
 }  
+//修改礼品规格
 
+export function alterGiftSpecs(data) {
+  return AXIOS.post('/product/specifications/?put', data)
+}  
 
