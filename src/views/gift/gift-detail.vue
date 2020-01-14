@@ -4,13 +4,13 @@
     <el-row :gutter="20">
       <el-col :span="10">
         <el-carousel :interval="5000" arrow="always">
-          <el-carousel-item v-for="(item,index) in giftList" :key="index">
+          <el-carousel-item v-for="(item,index) in turnsLists" :key="index">
             <el-image class="mini-image" :src="item?$store.state.BASE_URL+item:''" fit="cover"></el-image>
           </el-carousel-item>
         </el-carousel>
       </el-col>
       <el-col :span="6">
-        <label>标题: {{giftList2}}</label>
+        <label>标题: {{headline}}</label>
       </el-col>
       <el-col :span="8" style="padding-left:280px;">
         <el-button type="primary" icon="el-icon-plus" @click="openDialog(1)">添加规格</el-button>
@@ -112,14 +112,6 @@
                   @click="saveGiftSpecs(scope.$index,scope.row)"
                 />
               </el-tooltip>
-              <!-- <el-tooltip effect="dark" content="删除" placement="top">
-                <el-button
-                  @click="deleteMaterial(scope.row.id)"
-                  icon="el-icon-delete"
-                  style="color:red"
-                  type="text"
-                />
-              </el-tooltip> -->
             </template>
           </el-table-column>
         </el-table>
@@ -178,9 +170,9 @@ export default {
       editing: false,
         row: null,
        clickId: null,
-      giftList: [],
+      turnsLists: [],
       giftList1: [],
-      giftList2: [],
+      headline: [],
       giftSpeList: [],
       id: this.$route.params.id,
       addSpecsForm: {
@@ -218,10 +210,10 @@ export default {
     getviewGifts() {
       var id = this.id;
       viewGifts({ product_id: id }).then(({ data }) => {
-        let list = data.msg[0].turns;
-        this.giftList = list;
-        let list1 = data.msg[0].title;
-        this.giftList2 = list1;
+        let turnsList = data.msg[0].turns;
+        this.turnsLists = turnsList;
+        let head = data.msg[0].title;
+        this.headline = head;
       });
     },
     getviewGifts1() {
@@ -315,6 +307,7 @@ export default {
      // console.log(dataMaterial)
     }
   },
+  
   created() {
     this.getviewGifts();
     this.getGiftsSpecs();
