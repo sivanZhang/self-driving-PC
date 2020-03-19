@@ -110,6 +110,38 @@ export default function asyncRoutes(params) {
       }
     ]
     },
+    {
+      path: '/order-manage',
+      component: Layout,
+      redirect: 'noRedirect',
+      meta: {
+        title: '订单管理',
+        icon: 'settings'
+      },
+      children: [{
+          path: 'deliveryInfo',
+          name: 'deliveryInfo',
+          component: () =>
+            import('@/views/order-manage/deliveryInfo'),
+          meta: {
+            title: '快递信息',
+            icon: 'group'
+          }
+        },
+        {
+          path: 'purchase',
+          name: 'purchase',
+          component: () =>
+            import('@/views/order-manage/purchase'),
+          meta: {
+            title: '购买方式',
+            icon: 'group'
+          }
+        },
+       
+       
+      ]
+    },
     { // 404必须在最后面
       path: '*',
       redirect: '/404',
