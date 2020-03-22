@@ -195,11 +195,12 @@ export default {
         coin_cash: null
       },
       alertWaysForm: {
-        // purchaseWay: null,
-        // coin: null,
-        // cash: null,
-        // coin_cash: null
-      }
+        purchaseWay: null,
+        coin: null,
+        cash: null,
+        coin_cash: null
+      },
+      id: ""
     };
   },
   methods: {
@@ -225,33 +226,51 @@ export default {
       if (params.coin_cash == null) {
         delete params.coin_cash;
       }
-      addPurchaseWay(params).then(({ data }) => {
+      editPurchaseWay(params).then(({ data }) => {
         if (data.status === 0) {
           this.$message.success(data.msg);
           this.dialogShow = false;
+          this.editPurchaseWay = {};
+          this.getPurchaseWay();
+        }
+      });
+    },
+    alertForm(alertWaysForm) {
+      let params = {};
+      params = {
+        goods_id: this.id,
+        purchase_way: this.alertWaysForm.purchaseWay
+          .map(item => item)
+          .join(","),
+        coin: this.alertWaysForm.coin,
+        cash: this.alertWaysForm.cash,
+        coin_cash: this.alertWaysForm.coin_cash
+      };
+      if (params.coin == null) {
+        delete params.coin;
+      }
+      if (params.cash == null) {
+        delete params.cash;
+      }
+      if (params.coin_cash == null) {
+        delete params.coin_cash;
+      }
+      addPurchaseWay(params).then(({ data }) => {
+        if (data.status === 0) {
+          this.$message.success(data.msg);
+          this.dialogShow1 = false;
           this.addWaysForm = {};
           this.getPurchaseWay();
         }
       });
     },
-    alertForm(alertWaysForm) {},
     openDialog(Type) {
       if (Type === 1) {
         this.dialogShow = true;
       }
-
-      // if (Type === 2) {
-      //   this.dialogTitle = "修改商品购买方式";
-      //   this.addWaysForm = {
-      //     purchaseWay: row.purchase_way,
-      //     coin: this.row.coin,
-      //     cash: this.row.cash,
-      //     coin_cash: this.row.coin_cash
-      //   };
-      //   this.dialogShow = true;
-      // }
     },
     openDialog1(row) {
+      this.id = row.goods_id;
       var array = row.purchase_way.split(",");
       this.alertWaysForm = {
         purchaseWay: array,
