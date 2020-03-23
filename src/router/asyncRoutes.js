@@ -142,6 +142,27 @@ export default function asyncRoutes(params) {
        
       ]
     },
+    {
+      path: '/coinManage',
+      component: Layout,
+      redirect: 'Redirect',
+      alwaysShow: true,
+      meta: {
+        title: '积分管理',
+        icon: 'settings'
+      },
+      children: [{
+          path: 'coinInfo',
+          name: 'coinInfo',
+          component: () =>
+            import('@/views/coinManage/coinInfo'),
+          meta: {
+            title: '积分信息',
+            icon: 'group'
+          }
+        },
+      ]
+    },
     { // 404必须在最后面
       path: '*',
       redirect: '/404',
