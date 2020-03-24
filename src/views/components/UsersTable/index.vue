@@ -15,48 +15,48 @@
             <el-avatar size="small">{{scope.row.username | avatarFormat}}</el-avatar>
           </template>
         </el-table-column>
-        <el-table-column prop="username" label="姓名" align="left" class-name="links">
+         <el-table-column prop="username" label="姓名" align="left" class-name="links" width="120px">
           <template slot-scope="scope">
             <el-input
               size="small"
               v-model="scope.row.username"
               placeholder="请输入用户名"
-              v-if="editing&&clickId === scope.row.id"
+              v-if="editing&&clickId === scope.row.userid"
               @change="showEditIcon"
             >
               <span>{{scope.row.username}}</span>
             </el-input>
             <span
-              v-if="!editing||clickId !== scope.row.id"
+              v-if="!editing||clickId !== scope.row.userid"
               @click="showDrawer(scope.row)"
             >{{scope.row.username}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="sex" label="性别" align="center" width="80">
+        <el-table-column prop="sex" label="性别" align="center" width="150">
           <template slot-scope="scope">
             <el-select
               v-model="scope.row.sex"
-              v-if="editing&&clickId === scope.row.id"
+              v-if="editing&&clickId === scope.row.userid"
               @change="showEditIcon"
             >
               <el-option label="男" value="男">男</el-option>
               <el-option label="女" value="女">女</el-option>
             </el-select>
-            <span v-if="!editing||clickId !== scope.row.id">{{scope.row.sex}}</span>
+            <span v-if="!editing||clickId !== scope.row.userid">{{scope.row.sex}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="email" label="邮箱" align="left" width="180px">
+        <el-table-column prop="email" label="邮箱" align="left" width="200px">
           <template slot-scope="scope">
             <el-input
               size="small"
               v-model="scope.row.email"
               placeholder="请输入邮箱"
-              v-if="editing&&clickId === scope.row.id"
+              v-if="editing&&clickId === scope.row.userid"
               @change="showEditIcon"
             >
               <span>{{scope.row.email}}</span>
             </el-input>
-            <span v-if="!editing||clickId !== scope.row.id">{{scope.row.email}}</span>
+            <span v-if="!editing||clickId !== scope.row.userid">{{scope.row.email}}</span>
           </template>
         </el-table-column>
         <el-table-column prop="phone" label="电话" align="left">
@@ -65,45 +65,45 @@
               size="small"
               v-model="scope.row.phone"
               placeholder="请输入电话"
-              v-if="editing&&clickId === scope.row.id"
+              v-if="editing&&clickId === scope.row.userid"
               @change="showEditIcon"
             >
               <span>{{scope.row.phone}}</span>
             </el-input>
-            <span v-if="!editing||clickId !== scope.row.id">{{scope.row.phone}}</span>
+            <span v-if="!editing||clickId !== scope.row.userid">{{scope.row.phone}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="dept" label="工种" align="left">
+        <!-- <el-table-column prop="dept" label="工种" align="left">
           <template slot-scope="scope">
             <div style="float:left;padding:5px" v-for="(item,index) of scope.row.dept" :key="index">
               <span @click="jump(item.id)" style="cursor: pointer">{{item.name}}</span>
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="role" label="职务/角色" align="left" />
-        <el-table-column label="是否启用" align="center" width="100">
+        <el-table-column prop="role" label="职务/角色" align="left" />-->
+       <!-- <el-table-column label="是否启用" align="center" width="100">
           <template slot-scope="scope">
-            <!-- <el-checkbox v-model="scope.row.is_active" disabled></el-checkbox> -->
-            <div v-if="!editing||clickId !== scope.row.id">
+           <el-checkbox v-model="scope.row.is_active" disabled></el-checkbox> 
+         <div v-if="!editing||clickId !== scope.row.userid">
               <i v-if="scope.row.is_active" class="el-icon-check"></i>
               <i v-else class="el-icon-close"></i>
             </div>
             <el-switch
               @change="showEditIcon"
               v-model="scope.row.is_active"
-              v-if="editing&&clickId === scope.row.id"
+              v-if="editing&&clickId === scope.row.userid"
             ></el-switch>
           </template>
-        </el-table-column>
+        </el-table-column>  -->
 
         <el-table-column label="操作" align="center" show-overflow v-if="perssion">
-          <template slot-scope="scope">
-            <!-- <el-tooltip content="用户权限" placement="top">
+          <template slot-scope="scope"> 
+           <!-- <el-tooltip content="用户权限" placement="top">
             <el-button icon="el-icon-user" type="text" style="color:deepskyblue" />
-            </el-tooltip>-->
+            </el-tooltip> -->
             <el-tooltip effect="dark" content="修改" placement="top">
               <el-button
-                v-if="!editing||clickId !== scope.row.id"
+                v-if="!editing||clickId !== scope.row.userid"
                 type="primary"
                 icon="el-icon-edit"
                 @click="editUser(scope.row)"
@@ -111,19 +111,19 @@
             </el-tooltip>
             <el-tooltip effect="dark" content="保存" placement="top">
               <el-button
-                v-if="editing&&clickId === scope.row.id"
+                v-if="editing&&clickId === scope.row.userid"
                 type="success"
                 icon="el-icon-check"
                 @click="saveEdit(scope.$index,scope.row)"
               />
             </el-tooltip>
             <el-tooltip effect="dark" content="删除" placement="top">
-              <el-button type="danger" icon="el-icon-delete" @click="deleteUser(scope.row.id)" />
+              <el-button type="danger" icon="el-icon-delete" @click="deleteUser(scope.row.userid)" />
             </el-tooltip>
 
-            <!-- <el-tooltip content="删除用户" placement="top">
+          <!-- <el-tooltip content="删除用户" placement="top">
             <el-button icon="el-icon-delete" type="text" style="color:red"  />
-            </el-tooltip>-->
+            </el-tooltip> -->
           </template>
         </el-table-column>
       </el-table>
@@ -252,7 +252,7 @@ export default {
         });
       } else {
         this.editing = true;
-        this.clickId = row.id;
+        this.clickId = row.userid;
       }
       // console.log("edit");
       // console.log(index);
@@ -264,9 +264,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(() => {
-        console.log(id);
         deleteUser({ ids: id, method: "delete " }).then(({ data }) => {
-          console.log(data.msg);
           if (data.status === 0) {
             this.$emit("refresh");
             this.$message.success(data.msg);
@@ -293,7 +291,7 @@ export default {
         // console.log(row);
         editUserDetail({
           method: "put",
-          userid: row.id,
+          userid: row.userid,
           username: row.username,
           email: row.email,
           phone: row.phone,

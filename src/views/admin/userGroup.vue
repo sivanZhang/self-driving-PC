@@ -184,8 +184,6 @@ export default {
 
   methods: {
     submitForm(resetPassForm) {
-      // console.log(this.resetPassForm)
-       console.log(this.multipleSelection)
       this.$refs[resetPassForm].validate(valid => {
         if (valid) {
           const id = this.multipleSelection.map(item => item.id).join(",");
@@ -210,10 +208,11 @@ export default {
     },
     getAllUserlist() {
       this.tLoading = true
-      getUserList().then(({ data }) => {
-        this.UserList = [...data];
+      getUserList().then( res => {
+        this.UserList = res.data.msg;
         this.dealUserCount = this.UserList.length;
-        this.tLoading = false
+        this.tLoading = false;
+       
       }).catch(()=>{
         this.tLoading = false
       })
@@ -248,7 +247,7 @@ export default {
       }).then(() => {
         const ids = this.multipleSelection.map(item => item.id).join(",");
         deleteUser({ ids: ids, method: "delete" }).then(({ data }) => {
-          console.log(data.msg);
+        
           if (data.status === 0) {
             this.getAllUserlist();
             this.$message.success(data.msg);
@@ -321,8 +320,8 @@ export default {
       handler: function(newVal, oldVal) {
         if (newVal) {
           //this.$store.dispatch("admin/get_UserList",newVal);
-          getUserList({ username: newVal }).then(({ data }) => {
-            this.UserList = [...data];
+          getUserList({ username: newVal }).then(res=> {
+            this.UserList = res.data.msg;
           });
         } else {
           this.getAllUserlist();
