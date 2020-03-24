@@ -61,7 +61,27 @@ export default [
     }
   ]
   },
- 
+  {
+    path: '/coinManage',
+    component: Layout,
+    redirect: 'noRedirect',
+    meta: {
+      title: '积分管理',
+      icon: 'tree-table',
+    },
+    hidden: true,
+    children: [{
+      path: 'coinDetail/:id',
+      name: 'coinDetail',
+      component: () =>
+        import('@/views/coinManage/coinDetail'),
+      meta: {
+        title: '积分详情',
+        icon: 'tree',
+      }
+    }
+  ]
+  },
   {
     path: '/404',
     component: () =>
