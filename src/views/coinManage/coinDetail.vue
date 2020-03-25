@@ -11,7 +11,7 @@
       style="width: 100%"
     >
       <el-table-column type="index" label="序号" width="100px" align="center"></el-table-column>
-      <el-table-column prop="action" label="变动数量" align="center"></el-table-column>
+      <el-table-column prop="action" label="变动数量" width="150" align="center"></el-table-column>
       <el-table-column prop="reason" label="变动原因" align="center"></el-table-column>
       <el-table-column label="变动时间" align="center">
         <template slot-scope="scope">

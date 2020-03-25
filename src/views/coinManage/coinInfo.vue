@@ -1,5 +1,14 @@
 <template>
   <div id="coinInfo">
+    <el-col :span="1.5" style="padding:5px 2px 0 5px;">
+      用户名:
+    </el-col>
+    <el-col :span="3">
+      <el-input v-model="username"></el-input>
+    </el-col>
+    <el-col :span="2">
+      <el-button type="primary" @click="search()" style="margin:0px 0px 8px 10px">点击查询</el-button>
+    </el-col>
     <el-table
       :data="coinList"
       border
@@ -13,11 +22,13 @@
       <el-table-column type="index" label="序号" width="100px" align="center"></el-table-column>
       <el-table-column prop="user_name" label="用户名" align="center"></el-table-column>
       <el-table-column prop="sum" label="总积分数" align="center">
+      </el-table-column>
+      <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <router-link
-            style="cursor: pointer;"
+            style="cursor: pointer;color:blue"
             :to="{name:'coinDetail',params:{id:scope.row.user_id},query:{type:scope.row.pro_type}}"
-          >{{scope.row.sum}}</router-link>
+          >积分记录详情</router-link>
         </template>
       </el-table-column>
     </el-table>
@@ -49,6 +60,7 @@ export default {
       pageSize: 20,
       pageSizeList: [10, 20, 30, 50],
       cutType: -1, //分页类型
+      username:''
     };
   },
   methods: {
@@ -63,7 +75,7 @@ export default {
           this.getCoinList();//正常查看
           break;
         case 1:
-          this.getCoinList(); //筛选分页查看
+          this.search(); //筛选分页查看
           break;
       }
     },
@@ -72,6 +84,19 @@ export default {
         page:this.currentPage,
         pagenum:this.pageSize,
         num:"",
+        all:""
+      }
+      getCoin(data).then(({ data }) => {
+        this.coinList = [...data.msg];
+        this.total = data.count
+      });
+    },
+    search(){
+      this.cutType = 1;
+      let data = {
+        page:this.currentPage,
+        pagenum:this.pageSize,
+        name:this.username,
         all:""
       }
       getCoin(data).then(({ data }) => {
