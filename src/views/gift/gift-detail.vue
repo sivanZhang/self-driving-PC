@@ -4,13 +4,13 @@
     <el-row :gutter="20">
       <el-col :span="10">
         <el-carousel :interval="5000" arrow="always">
-          <el-carousel-item v-for="(item,index) in turnsLists" :key="index">
+          <el-carousel-item v-for="(item,index) in giftList.turns" :key="index">
             <el-image class="mini-image" :src="item?$store.state.BASE_URL+item:''" fit="cover"></el-image>
           </el-carousel-item>
         </el-carousel>
       </el-col>
       <el-col :span="6">
-        <label>标题: {{headline}}</label>
+        <label>标题: {{giftList.title}}</label>
       </el-col>
       <el-col :span="8" style="padding-left:280px;">
         <el-button type="primary" icon="el-icon-plus" @click="openDialog(1)">添加规格</el-button>
@@ -118,11 +118,11 @@
       </el-col>
     </el-row>
 
-    <el-col :span="24" v-for="(item,index) in giftList1" :key="index">
+    <el-col :span="24">
       <el-card>
         <el-col :span="24">
           <p class="subtitle">礼品说明：</p>
-          <div v-html="item.content"></div>
+          <div v-html="giftList.content"></div>
         </el-col>
       </el-card>
     </el-col>
@@ -168,11 +168,9 @@ export default {
     return {
       dialogShow1: false,
       editing: false,
-        row: null,
-       clickId: null,
-      turnsLists: [],
-      giftList1: [],
-      headline: [],
+      row: null,
+      clickId: null,
+      giftList: {},
       giftSpeList: [],
       id: this.$route.params.id,
       addSpecsForm: {
@@ -206,27 +204,31 @@ export default {
         this.dialogShow1 = true;
       }
     },
-    //轮播图
+    // //轮播图
+    // getviewGifts() {
+    //   var id = this.id;
+    //   viewGifts({ product_id: id }).then(({ data }) => {
+    //     let turnsList = data.msg[0].turns;
+    //     this.turnsLists = turnsList;
+    //     console.log('111111')
+    //     console.log(this.turnsLists)
+    //     let head = data.msg[0].title;
+    //     this.headline = head;
+    //   });
+    // },
     getviewGifts() {
       var id = this.id;
       viewGifts({ product_id: id }).then(({ data }) => {
-        let turnsList = data.msg[0].turns;
-        this.turnsLists = turnsList;
-        let head = data.msg[0].title;
-        this.headline = head;
-      });
-    },
-    getviewGifts1() {
-      var id = this.id;
-      viewGifts({ product_id: id }).then(({ data }) => {
-        this.giftList1 = [...data.msg];
+        this.giftList = data.msg[0];
       });
     },
     //查看礼品规格
     getGiftsSpecs() {
       var id = this.id;
       viewGiftsSpecs({ product_id: id }).then(({ data }) => {
-        this.giftSpeList = [...data.msg];
+        this.giftSpeList = data.msg;
+        console.log("222222222");
+        console.log(this.giftSpeList);
       });
     },
     //添加规格
@@ -260,23 +262,21 @@ export default {
     cancel() {
       this.addSpecsForm = [];
     },
-     //是否显示行内修改框
+    //是否显示行内修改框
     showEditIcon() {
       this.iconShow = true;
     },
-     //修改礼品规格
+    //修改礼品规格
     editGiftSpecs(row) {
-     
       if (this.iconShow === true) {
         this.$confirm("当前修改未保存", "注意", {
-
           type: "warning"
         });
       } else {
         this.editing = true;
         this.clickId = row.id;
         //   console.log('111111')
-       //  console.log(this.clickId)
+        //  console.log(this.clickId)
       }
     },
     //确认修改礼品规格
@@ -290,28 +290,26 @@ export default {
         number: row.num,
         price: row.price,
         coin: row.coin,
-        content:row.content,
-
+        content: row.content
       };
-    //  console.log('111111')
-    //      console.log(specs)
+      //  console.log('111111')
+      //      console.log(specs)
       alterGiftSpecs(specs).then(({ data }) => {
         if (data.status === 0) {
           this.$message.success(data.msg);
           this.getGiftsSpecs();
-      (this.editing = false);
+          this.editing = false;
         } else {
           this.$message.error(data.msg);
         }
       });
-     // console.log(dataMaterial)
+      // console.log(dataMaterial)
     }
   },
-  
+
   created() {
-    this.getviewGifts();
     this.getGiftsSpecs();
-    this.getviewGifts1();
+    this.getviewGifts();
   }
 };
 </script>
