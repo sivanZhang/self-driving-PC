@@ -19,3 +19,7 @@ export function addPurchaseWay(data) {
 export function editPurchaseWay(data) {
     return AXIOS.post('/product/purchase_way/', data)
 }
+//查询对应状态下的订单详情
+export function searchStatusInfo(params){
+    return AXIOS.get('/product/bill/',{params})
+}

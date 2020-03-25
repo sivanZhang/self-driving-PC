@@ -94,7 +94,7 @@ export default function asyncRoutes(params) {
         component: () =>
           import('@/views/gift-manage'),
         meta: {
-          title: '礼品管理',
+          title: '礼品展示',
           icon: 'gift'
         }
       },
@@ -114,6 +114,7 @@ export default function asyncRoutes(params) {
       path: '/order-manage',
       component: Layout,
       redirect: 'noRedirect',
+      alwaysShow: true,
       meta: {
         title: '订单管理',
         icon: 'settings'
@@ -124,20 +125,20 @@ export default function asyncRoutes(params) {
           component: () =>
             import('@/views/order-manage/deliveryInfo'),
           meta: {
-            title: '快递信息',
+            title: '订单列表',
             icon: 'group'
           }
         },
-        {
-          path: 'purchase',
-          name: 'purchase',
-          component: () =>
-            import('@/views/order-manage/purchase'),
-          meta: {
-            title: '购买方式',
-            icon: 'group'
-          }
-        },
+        // {
+        //   path: 'purchase',
+        //   name: 'purchase',
+        //   component: () =>
+        //     import('@/views/order-manage/purchase'),
+        //   meta: {
+        //     title: '购买方式',
+        //     icon: 'group'
+        //   }
+        // },
        
        
       ]
