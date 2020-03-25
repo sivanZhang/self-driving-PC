@@ -1,12 +1,6 @@
 <template>
   <div id="purchase">
     <!-- 购买方式 -->
-    <el-button
-      type="primary"
-      @click="openDialog(1)"
-      style="margin-bottom:5px;"
-      :disabled="this.multipleSelection.length === 0 ||this.multipleSelection.length>1"
-    >新增商品购买方式</el-button>
     <el-table
       :data="PurchaseWayList"
       border
@@ -57,54 +51,12 @@
               type="text"
               style="color:blue"
               @click="openDialog1(scope.row)"
-              v-if="!editing||clickId !== scope.row.id"
+           
             ></el-button>
           </el-tooltip>
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog title="新增商品购买方式" :visible.sync="dialogShow" width="380px">
-      <el-form :model="addWaysForm" status-icon :rules="rules" ref="addWaysForm" label-width="90px">
-        <el-form-item label="购买方式" prop="purchaseWay ">
-          <el-select v-model="addWaysForm.purchaseWay" placeholder="请选择" multiple>
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="积分数量" prop="coin">
-          <el-input
-            style="width:192px;"
-            v-model="addWaysForm.coin"
-            onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"
-            placeholder="必须为数字"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="现金数量" prop="cash">
-          <el-input
-            style="width:192px;"
-            v-model="addWaysForm.cash"
-            onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"
-            placeholder="必须为数字"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="积分+现金数量" prop="coin_cash">
-          <el-input
-            style="width:192px;"
-            v-model="addWaysForm.coin_cash"
-            onkeyup="this.value = this.value.replace(/[^\d+(,\d\d\d)*.\d+$]/g,'');"
-            placeholder="用逗号隔开，左边是积分"
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button @click="resetForm('addWaysForm')">重置</el-button>
-          <el-button type="primary" @click="submitForm('addWaysForm')">提交</el-button>
-        </el-form-item>
-      </el-form>
-    </el-dialog>
     <el-dialog title="修改商品购买方式" :visible.sync="dialogShow1" width="380px">
       <el-form
         :model="alertWaysForm"
@@ -148,7 +100,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <!-- <el-button @click="resetForm('addWaysForm')">重置</el-button> -->
+          <el-button @click="resetForm('alertWaysForm')">重置</el-button>
           <el-button type="primary" @click="alertForm('alertWaysForm')">提交</el-button>
         </el-form-item>
       </el-form>
@@ -167,11 +119,7 @@ export default {
     return {
       PurchaseWayList: [],
       multipleSelection: [],
-      dialogShow: false,
       dialogShow1: false,
-      dialogTitle: "",
-      editing: false,
-      clickId: null,
       options: [
         {
           value: "1",
@@ -204,37 +152,10 @@ export default {
     };
   },
   methods: {
-    resetForm(addWaysForm) {
-      this.$refs["addWaysForm"].resetFields();
+    resetForm(alertWaysForm) {
+      this.$refs["alertWaysForm"].resetFields();
     },
-    submitForm(addWaysForm) {
-      const id = this.multipleSelection.map(item => item.goods_id).join(",");
-      let params = {};
-      params = {
-        goods_id: id,
-        purchase_way: this.addWaysForm.purchaseWay.map(item => item).join(","),
-        coin: this.addWaysForm.coin,
-        cash: this.addWaysForm.cash,
-        coin_cash: this.addWaysForm.coin_cash
-      };
-      if (params.coin == null) {
-        delete params.coin;
-      }
-      if (params.cash == null) {
-        delete params.cash;
-      }
-      if (params.coin_cash == null) {
-        delete params.coin_cash;
-      }
-      editPurchaseWay(params).then(({ data }) => {
-        if (data.status === 0) {
-          this.$message.success(data.msg);
-          this.dialogShow = false;
-          this.editPurchaseWay = {};
-          this.getPurchaseWay();
-        }
-      });
-    },
+   
     alertForm(alertWaysForm) {
       let params = {};
       params = {
@@ -263,11 +184,6 @@ export default {
           this.getPurchaseWay();
         }
       });
-    },
-    openDialog(Type) {
-      if (Type === 1) {
-        this.dialogShow = true;
-      }
     },
     openDialog1(row) {
       this.id = row.goods_id;

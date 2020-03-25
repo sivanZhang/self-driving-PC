@@ -47,8 +47,6 @@
           快递公司：{{scope.row.express_company}}
         </template>
       </el-table-column>
-      <!-- <el-table-column prop="express_number" label="运单号 "></el-table-column>
-      <el-table-column prop="express_company" label="快递公司"></el-table-column> -->
       <el-table-column prop="purchase_way" label="购买方式"></el-table-column>
       <el-table-column prop="money" label="现金购买"></el-table-column>
       <el-table-column prop="coin" label="积分购买"></el-table-column>

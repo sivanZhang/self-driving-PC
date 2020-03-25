@@ -114,6 +114,28 @@ export default function asyncRoutes(params) {
       path: '/order-manage',
       component: Layout,
       redirect: 'noRedirect',
+      meta: {
+        breadcrumb: false,
+        title: '',
+        icon: 'gailan'
+      },
+      children: [ 
+        {
+          path: 'purchase',
+          name: 'purchase',
+          component: () =>
+            import('@/views/order-manage/purchase'),
+          meta: {
+            title: '购买方式',
+            icon: 'group'
+          }
+        },
+      ]
+    },
+    {
+      path: '/order-manage',
+      component: Layout,
+      redirect: 'noRedirect',
       alwaysShow: true,
       meta: {
         title: '订单管理',
