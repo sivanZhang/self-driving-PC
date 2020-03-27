@@ -201,7 +201,7 @@ export default {
       }
     },
     getOrders() {
-      searchOrders({status_id:1}).then(res => {
+      searchStatusInfo({status_id:1}).then(res => {
         this.orderList = res.data.msg;
       });
     },
