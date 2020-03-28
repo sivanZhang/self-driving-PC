@@ -15,7 +15,7 @@ export default {
     },
     height: {
       type: String,
-      default: "320px"
+      default: "150px"
     },
     chartId: {
       type: String,
@@ -54,7 +54,7 @@ export default {
     initChart(title = "", chartData = []) {
       let options = {
         title: {
-          text: title,
+          text: "",
           textStyle: {
             fontSize: 14
           },
@@ -66,14 +66,42 @@ export default {
           formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
         legend: {
-          bottom: "0"
+          orient: 'vertical',
+          bottom: "-5",
+          left:"15",
+          x: 'left',
+          textStyle: { //图例文字的样式
+            color: '#fff',
+            fontWeight: 'bold'
+          },
         },
+        color :[ '#d25b34','#0ea162'],
         series: [
           {
             name: title,
             type: "pie",
             data: chartData,
-            radius: [0, 100]
+            itemStyle : {
+              emphasis : {
+                shadowColor: '#19bdcf',    				
+                shadowBlur: 10,					
+                shadowOffsetX:2 
+              }
+            },
+            radius: [0, 65],
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: false,
+                    textStyle: {
+                        fontSize: '20',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
           }
         ]
       };
