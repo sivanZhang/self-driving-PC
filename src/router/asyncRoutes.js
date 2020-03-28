@@ -186,6 +186,27 @@ export default function asyncRoutes(params) {
         },
       ]
     },
+    {
+      path: '/activityManage',
+      component: Layout,
+      redirect: 'Redirect',
+      alwaysShow: true,
+      meta: {
+        title: '活动管理',
+        icon: 'activity'
+      },
+      children: [{
+          path: 'activityList',
+          name: 'activityList',
+          component: () =>
+            import('@/views/activityManage/activityList'),
+          meta: {
+            title: '活动列表',
+            icon: 'activityList'
+          }
+        },
+      ]
+    },
     { // 404必须在最后面
       path: '*',
       redirect: '/404',
