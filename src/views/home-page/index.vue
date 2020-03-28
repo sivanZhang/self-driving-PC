@@ -2,6 +2,7 @@
 import noticeDetail from "@/components/Notice/components/notice-detail";
 import GaugeChart from "@/components/ECharts/GaugeChart";
 import Chart from "@/components/ECharts/PieChart";
+import {getStatDate} from "@/api/appstat"
 import { mapState } from "vuex";
 export default {
   name: "home-page",
@@ -11,7 +12,15 @@ export default {
     Chart
   },
   data() {
-    return {};
+    return {
+      totalCoin:"",
+      addCoin:"",
+      totalUser:"",
+      addUser:"",
+      totalOrder:"",
+      addOrder:"",
+      undelivered:""
+    };
   },
   computed: {
     ...mapState("notice", ["Notice", "unreadCount"]),
@@ -48,50 +57,76 @@ export default {
       });
     },
     coinNumber(){
-      let option1 = [
-        {
-          name: "今日新增",
-          value: 100
-        },
-        [[0.2, '#0eb2d3']]
-      ]
-      this.$nextTick(()=>{
-        this.$refs["coinChart"].initChart("", option1);
+      let data = {
+        coin:""
+      }
+      getStatDate(data).then(({ data }) => {
+        this.totalCoin = data.all,
+        this.addCoin = data.add
+        let percentage = (data.add/data.all).toFixed(2)
+        let option1 = [
+          {
+            name: "今日新增",
+            value: data.add
+          },
+          [[percentage, '#0eb2d3']]
+        ]
+        this.$nextTick(()=>{
+          this.$refs["coinChart"].initChart("", option1);
+        });
       });
     },
     userNumber(){
-      let option2 = [
-        {
-          name: "今日新增",
-          value: 200
-        },
-        [[0.3, '#c5cf45']]
-      ]
-      this.$nextTick(()=>{
-        this.$refs["userChart"].initChart("", option2);
+      let data = {
+        user:""
+      }
+      getStatDate(data).then(({ data }) => {
+        this.totalUser = data.all,
+        this.addUser = data.add
+        let percentage = (data.add/data.all).toFixed(2)
+        let option2 = [
+          {
+            name: "今日新增",
+            value: data.add
+          },
+          [[percentage, '#c5cf45']]
+        ]
+        this.$nextTick(()=>{
+          this.$refs["userChart"].initChart("", option2);
+        });
       });
     },
     orderNumber(){
-      let option3 = [
-        {
-          name: "今日新增",
-          value: 300
-        },
-        [[0.5, '#0ea162']]
-      ];
-      let option4 = [
-        {
-          name: "未发货订单",
-          value: 100
-        },
-        {
-          name: "已发货订单",
-          value: 200
-        }
-      ]
-      this.$nextTick(()=>{
-        this.$refs["orderChart1"].initChart("", option3);
-        this.$refs["orderChart2"].initChart("订单发货状态", option4);
+      let data = {
+        bill:""
+      }
+      getStatDate(data).then(({ data }) => {
+        this.totalOrder = data.all
+        this.addOrder = data.add
+        this.undelivered = data.wait
+        let delivered = data.all - data.wait
+        let percentage = (data.add/data.all).toFixed(2)
+        let option3 = [
+          {
+            name: "今日新增",
+            value: data.add
+          },
+          [[percentage, '#0ea162']]
+        ];
+        let option4 = [
+          {
+            name: "未发货订单数",
+            value: data.wait
+          },
+          {
+            name: "已发货订单数",
+            value: delivered
+          }
+        ]
+        this.$nextTick(()=>{
+          this.$refs["orderChart1"].initChart("", option3);
+          this.$refs["orderChart2"].initChart("订单发货状态", option4);
+        });
       });
     }
   }, 
@@ -214,10 +249,10 @@ export default {
           >
             <span>积分数量统计</span>
           </el-row>
-          <el-row><GaugeChart ref="coinChart" chart-id="coinChart" height="180px" style="margin-top:-10px"/></el-row>
+          <el-row><GaugeChart ref="coinChart" chart-id="coinChart" height="160px"/></el-row>
           <div class="row-text">
-            <el-row>今日新增积分数：<span class="row-text-number">100</span></el-row>
-            <el-row>总积分数:<span class="row-text-number">1000</span></el-row>
+            <el-row>今日新增积分数: <span class="row-text-number">{{this.addCoin}}</span></el-row>
+            <el-row>总积分数: <span class="row-text-number">{{this.totalCoin}}</span></el-row>
           </div>
         </el-card>
       </el-col>
@@ -232,10 +267,10 @@ export default {
           >
             <span>用户数量统计</span>
           </el-row>
-          <el-row><GaugeChart ref="userChart" chart-id="userChart" height="180px" style="margin-top:-10px"/></el-row>
+          <el-row><GaugeChart ref="userChart" chart-id="userChart" height="160px"/></el-row>
           <div class="row-text">
-            <el-row>今日新增用户数：<span class="row-text-number">200</span></el-row>
-            <el-row>总用户数:<span class="row-text-number">1000</span></el-row>
+            <el-row>今日新增用户数: <span class="row-text-number">{{this.addUser}}</span></el-row>
+            <el-row>总用户数: <span class="row-text-number">{{this.totalUser}}</span></el-row>
           </div>
         </el-card>
       </el-col>
@@ -251,10 +286,10 @@ export default {
             <span>订单数量统计</span>
           </el-row>
           <el-row>
-            <el-col :span="12"><GaugeChart ref="orderChart1" chart-id="orderChart1" height="180px" style="margin-top:-10px"/>
+            <el-col :span="12"><GaugeChart ref="orderChart1" chart-id="orderChart1" height="160px"/>
               <div class="row-text">
-                <el-row>今日新增订单：<span class="row-text-number">300</span></el-row>
-                <el-row>总订单数:<span class="row-text-number">1000</span></el-row>
+                <el-row>今日新增订单: <span class="row-text-number">{{this.addOrder}}</span></el-row>
+                <el-row>总订单数: <span class="row-text-number">{{this.totalOrder}}</span></el-row>
               </div>
             </el-col>
             <el-col :span="12"><chart ref="orderChart2" chart-id="orderChart2" height="250px" style="margin-top:-50px"/></el-col>
@@ -276,9 +311,12 @@ export default {
   .content{
     color:white;
   }
+  .el-loading-mask{
+    background-color:#13345f
+  }
   .row-text{
     margin-left:5px;
-    margin-top:-20px;
+    margin-top:-10px;
     color:white;
     font-size:12px;
     font-weight: bold;
