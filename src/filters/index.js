@@ -30,6 +30,20 @@ export function dateHMSFormat(date) {
         return ''
     }
 }
+//活动状态格式化
+export function activityStatus(code) {
+    switch (code) {
+        case 0:
+            return '草稿'
+            break
+        case 1:
+            return '可用'
+            break
+        case 2:
+            return '已过期'
+            break
+    }
+}
 //项目工作流格式化
 export function projectStatus(code) {
     switch (code) {
