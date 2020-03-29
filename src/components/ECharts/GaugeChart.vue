@@ -118,7 +118,7 @@ export default {
                 length:10,				
                 lineStyle:{				  
                     color: '#1f5c91',				  
-                    width:1			
+                    width:0.5		
                 }			
             },            			
             axisTick: {				

@@ -288,7 +288,7 @@ export default {
           <el-row>
             <el-col :span="12"><GaugeChart ref="orderChart1" chart-id="orderChart1" height="160px"/>
               <div class="row-text">
-                <el-row>今日新增订单: <span class="row-text-number">{{this.addOrder}}</span></el-row>
+                <el-row>今日新增订单数: <span class="row-text-number">{{this.addOrder}}</span></el-row>
                 <el-row>总订单数: <span class="row-text-number">{{this.totalOrder}}</span></el-row>
               </div>
             </el-col>
