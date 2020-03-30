@@ -84,7 +84,6 @@
         :model="actForm"
         ref="actForm"
         label-width="100px"
-        hide-required-asterisk
         label-position="left"
       >
         <el-form-item label="活动标题" prop="title">
@@ -115,7 +114,7 @@
             <el-upload
                 accept="picture/jpeg, picture/gif, picture/png"
                 ref="upload"
-                class="upload"
+                class="upload-demo"
                 action="/api/appfile/appfile/"
                 :headers="headers"
                 :on-success="handleSuccess"
@@ -161,7 +160,7 @@ export default {
             actForm:{
                 title:null,
                 content:null,
-                picture:null,
+                picture:"",
                 url:null,
                 status:null
             },
@@ -190,6 +189,7 @@ export default {
         getActivity(){
             getActivityList({app:""}).then(({data})=>{
                 if(data.status == 0){
+                    console.log(data)
                     this.activityList = data.msg
                 }else{
                     return false;
@@ -272,9 +272,10 @@ export default {
         },
         //监听上传图片成功，成功后赋值给form ，并且赋值给图片src显示图片
         handleSuccess(response, file, fileList) {
+          console.log(response)
             if (response.status == 0) {
                 this.SRC = this.$store.state.BASE_URL + response.msg;
-                this.actForm.picture= response.msg;
+                this.actForm["picture"]= response.msg;
                 // this.addGiftsForm.image_id = response.id;
             } else {
                 this.$message.error(response.msg);
