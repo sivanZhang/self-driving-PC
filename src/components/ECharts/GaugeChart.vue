@@ -64,8 +64,8 @@ export default {
                 lineStyle: {                          
                     width: 12,					
                     color:[[1, '#1f5c91']],					
-                    shadowColor: '#19bdcf',    				
-                    shadowBlur: 10,					
+                    shadowColor: '#2d8cf0',    				
+                    shadowBlur: 8,					
                     shadowOffsetX:2                
                 }            
             },						
@@ -85,7 +85,7 @@ export default {
                 show: true,				
                 offsetCenter: [0, '20%'], 				
                 textStyle: {					
-                    color: 'white',					
+                    color: 'black',					
                     fontSize: 18			
                 }			
             },						
@@ -95,7 +95,7 @@ export default {
                 formatter: '{value}',				
                 textStyle: {					
                     fontSize: 28,					
-                    color:'#21e5f8'				
+                    color:'#2d8cf0'				
                 }			
             },	
             data:chartData,			
@@ -117,8 +117,8 @@ export default {
                 show:true,				
                 length:10,				
                 lineStyle:{				  
-                    color: '#1f5c91',				  
-                    width:0.5		
+                  color: '#1f5c91',				  
+                  width:0.5		
                 }			
             },            			
             axisTick: {				
@@ -138,7 +138,7 @@ export default {
                 offsetCenter: [0, '-10%'],				
                 formatter: '',				
                 textStyle: {					
-                    fontSize: 0				
+                  fontSize: 0				
                 }			
             },			
             data: [			 

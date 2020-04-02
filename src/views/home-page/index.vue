@@ -178,7 +178,7 @@ export default {
             <div class="content">
               <el-table
                 :data="unreadList.filter((t,i)=>i<5)"
-                style="width: 100%;background:#13345f"
+                style="width: 100%;"
                 ref="multipleTable"
                 tooltip-effect="dark"
                 @row-click="updateIsRead"
@@ -306,29 +306,29 @@ export default {
   font-size: 12px;
   .el-card {
     height: 300px;
-    background:#13345f
+    // background:#13345f
   }
-  .content{
-    color:white;
-  }
-  .el-loading-mask{
-    background-color:#13345f
-  }
+  // .content{
+  //   color:white;
+  // }
+  // .el-loading-mask{
+  //   background-color:#13345f
+  // }
   .row-text{
     margin-left:5px;
     margin-top:-10px;
-    color:white;
+    // color:white;
     font-size:12px;
     font-weight: bold;
   }
   .row-text-number{
-    color:#1ecfec;
+    color:#2d8cf0;
     font-size:20px;
     font-weight: bold;
     text-shadow: 1px 1px 2px #45d0f4;
   }
   .card-header {
-    color:white;
+    // color:white;
     font-size: 14px;
     font-weight: 600;
   }

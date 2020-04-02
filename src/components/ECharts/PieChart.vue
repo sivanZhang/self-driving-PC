@@ -71,7 +71,7 @@ export default {
           left:"15",
           x: 'left',
           textStyle: { //图例文字的样式
-            color: '#fff',
+            // color: '#fff',
             fontWeight: 'bold'
           },
         },
