@@ -172,7 +172,7 @@ export default function asyncRoutes(params) {
       alwaysShow: true,
       meta: {
         title: '积分管理',
-        icon: 'settings'
+        icon: 'coinManage'
       },
       children: [{
           path: 'coinInfo',
@@ -181,7 +181,7 @@ export default function asyncRoutes(params) {
             import('@/views/coinManage/coinInfo'),
           meta: {
             title: '积分信息',
-            icon: 'group'
+            icon: 'coinInfo'
           }
         },
       ]
