@@ -14,9 +14,9 @@
     >
       <el-table-column type="selection" align="center"></el-table-column>
       <el-table-column type="index"></el-table-column>
-      <el-table-column prop="goods__title" label="商品的标题" width="200px;"></el-table-column>
-      <el-table-column prop="goods__content" label="商品的内容" width="170px"></el-table-column>
-      <el-table-column label="商品图" align="center" width="120px;" height="50px;">
+      <el-table-column prop="goods__title" label="商品的标题" width="300px;"></el-table-column>
+      <el-table-column prop="goods__content" label="商品的内容" width="230px"></el-table-column>
+      <el-table-column label="商品图"  width="140px;" height="50px;">
         <template slot-scope="scope">
           <el-image
             :src="$store.state.BASE_URL+scope.row.goods__picture"
@@ -42,8 +42,8 @@
       ></el-table-column>
       <el-table-column prop="coin" label="积分数量" width="110px"></el-table-column>
       <el-table-column prop="cash" label="现金数量" width="110px"></el-table-column>
-      <el-table-column prop="coin_cash" label="积分+现金 " width="110px;"></el-table-column>
-      <el-table-column :key="18" label="操作" align="center">
+      <el-table-column prop="coin_cash" label="积分+现金 " width="150px;"></el-table-column>
+      <el-table-column :key="18" label="操作" align="center" width="110px;">
         <template slot-scope="scope">
           <el-tooltip effect="dark" content="修改购买方式" placement="top">
             <el-button
