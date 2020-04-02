@@ -204,18 +204,6 @@ export default {
         this.dialogShow1 = true;
       }
     },
-    // //轮播图
-    // getviewGifts() {
-    //   var id = this.id;
-    //   viewGifts({ product_id: id }).then(({ data }) => {
-    //     let turnsList = data.msg[0].turns;
-    //     this.turnsLists = turnsList;
-    //     console.log('111111')
-    //     console.log(this.turnsLists)
-    //     let head = data.msg[0].title;
-    //     this.headline = head;
-    //   });
-    // },
     getviewGifts() {
       var id = this.id;
       viewGifts({ product_id: id }).then(({ data }) => {
@@ -227,8 +215,6 @@ export default {
       var id = this.id;
       viewGiftsSpecs({ product_id: id }).then(({ data }) => {
         this.giftSpeList = data.msg;
-        console.log("222222222");
-        console.log(this.giftSpeList);
       });
     },
     //添加规格
@@ -275,8 +261,6 @@ export default {
       } else {
         this.editing = true;
         this.clickId = row.id;
-        //   console.log('111111')
-        //  console.log(this.clickId)
       }
     },
     //确认修改礼品规格
@@ -292,8 +276,6 @@ export default {
         coin: row.coin,
         content: row.content
       };
-      //  console.log('111111')
-      //      console.log(specs)
       alterGiftSpecs(specs).then(({ data }) => {
         if (data.status === 0) {
           this.$message.success(data.msg);
@@ -303,7 +285,6 @@ export default {
           this.$message.error(data.msg);
         }
       });
-      // console.log(dataMaterial)
     }
   },
 
