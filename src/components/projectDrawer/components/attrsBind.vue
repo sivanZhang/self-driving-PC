@@ -332,11 +332,11 @@ export default {
   },
 
   created() {
-    authAttr().then(({data})=>{
-      if(data.status === 0){
-        this.auth = data.auth.manage_attr
-      }
-    })
+    // authAttr().then(({data})=>{
+    //   if(data.status === 0){
+    //     this.auth = data.auth.manage_attr
+    //   }
+    // })
   }
 };
 </script>
