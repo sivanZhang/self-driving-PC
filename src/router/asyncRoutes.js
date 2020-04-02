@@ -30,57 +30,6 @@ export default function asyncRoutes(params) {
       ]
     },
     {
-      path: '/admin',
-      component: Layout,
-      redirect: 'noRedirect',
-      meta: {
-        title: '系统设置',
-        icon: 'settings'
-      },
-      children: [{
-          path: 'profession',
-          name: 'profession',
-          component: () =>
-            import('@/views/admin/userGroup'),
-          meta: {
-            title: '用户',
-            icon: 'group'
-          }
-        },
-        {
-          path: 'userGroup',
-          name: 'UserGroup',
-          component: () =>
-            import('@/views/admin/profession'),
-          meta: {
-            title: '部门及工种',
-            icon: 'profession'
-          }
-        },
-        {
-          path: 'roles',
-          name: 'UserGqqqroup',
-          component: () =>
-            import('@/views/admin/roles'),
-          meta: {
-            title: '角色管理',
-            icon: 'role',
-            roles: 'manage_role'
-          }
-        },
-        {
-          path: 'attrs',
-          name: 'customAttrs',
-          component: () =>
-            import('@/views/admin/customAttrs'),
-          meta: {
-            title: '自定义属性',
-            icon: 'custom-attrs',
-          }
-        },
-      ]
-    },
-    {
       path: '/gift-manage',
       component: Layout,
       redirect: 'noRedirect',
@@ -172,7 +121,7 @@ export default function asyncRoutes(params) {
       alwaysShow: true,
       meta: {
         title: '积分管理',
-        icon: 'coinManage'
+        icon: 'settings'
       },
       children: [{
           path: 'coinInfo',
@@ -181,7 +130,7 @@ export default function asyncRoutes(params) {
             import('@/views/coinManage/coinInfo'),
           meta: {
             title: '积分信息',
-            icon: 'coinInfo'
+            icon: 'group'
           }
         },
       ]
@@ -203,6 +152,57 @@ export default function asyncRoutes(params) {
           meta: {
             title: '活动列表',
             icon: 'activityList'
+          }
+        },
+      ]
+    },
+    {
+      path: '/admin',
+      component: Layout,
+      redirect: 'noRedirect',
+      meta: {
+        title: '系统设置',
+        icon: 'settings'
+      },
+      children: [{
+          path: 'profession',
+          name: 'profession',
+          component: () =>
+            import('@/views/admin/userGroup'),
+          meta: {
+            title: '用户',
+            icon: 'group'
+          }
+        },
+        {
+          path: 'userGroup',
+          name: 'UserGroup',
+          component: () =>
+            import('@/views/admin/profession'),
+          meta: {
+            title: '部门及工种',
+            icon: 'profession'
+          }
+        },
+        {
+          path: 'roles',
+          name: 'UserGqqqroup',
+          component: () =>
+            import('@/views/admin/roles'),
+          meta: {
+            title: '角色管理',
+            icon: 'role',
+            roles: 'manage_role'
+          }
+        },
+        {
+          path: 'attrs',
+          name: 'customAttrs',
+          component: () =>
+            import('@/views/admin/customAttrs'),
+          meta: {
+            title: '自定义属性',
+            icon: 'custom-attrs',
           }
         },
       ]
