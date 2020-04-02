@@ -1,7 +1,7 @@
 <template>
   <div id="activityInfo">
     <!-- 活动列表 -->
-    <el-row class="row-lg">
+    <el-row class="row-lg" v-if="this.auth==true">
         <el-col :span="2">
           <el-button 
             type="danger" 
@@ -31,11 +31,6 @@
     >
       <el-table-column type="selection" :reserve-selection="true"></el-table-column>
       <el-table-column type="index" label="序号" align="center"></el-table-column>
-      <el-table-column prop="title" label="活动标题" align="center"></el-table-column>
-      <el-table-column prop="content" label="活动内容" align="center"></el-table-column>
-      <el-table-column prop="date" label="活动发布日期" align="center">
-        <template slot-scope="scope">{{scope.row.date|dateFormat}}</template>
-      </el-table-column>
       <el-table-column label="活动图片" align="center">
         <template slot-scope="scope">
           <el-image
@@ -52,6 +47,11 @@
           </el-image>
         </template>
       </el-table-column>
+      <el-table-column prop="title" label="活动标题" align="center"></el-table-column>
+      <el-table-column prop="content" label="活动内容" align="center"></el-table-column>
+      <el-table-column prop="date" label="活动发布日期" align="center">
+        <template slot-scope="scope">{{scope.row.date|dateFormat}}</template>
+      </el-table-column>
       <el-table-column prop="url" label="活动跳转url" align="center"></el-table-column>
       <el-table-column label="活动状态" align="center">
           <template slot-scope="scope">
@@ -66,7 +66,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column :key="18" label="操作" align="center">
+      <el-table-column :key="18" label="操作" align="center" v-if="this.auth==true">
         <template slot-scope="scope">
           <el-tooltip effect="dark" content="删除活动" placement="top">
             <el-button
@@ -198,9 +198,9 @@ export default {
         },
         //获取活动管理权限
         getAuth(){
-           getActivityAuth({auth:''}).then(({data}) =>{
-               this.auth = data.msg.auth.manage_spread
-           }) 
+            getActivityAuth({auth:''}).then(({data}) =>{
+              this.auth = data.msg.auth.manage_spread
+            }) 
         },
         //删除活动
         deleteAct(id){
