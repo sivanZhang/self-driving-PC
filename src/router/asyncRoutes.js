@@ -136,6 +136,27 @@ export default function asyncRoutes(params) {
       ]
     },
     {
+      path: '/classifyManage',
+      component: Layout,
+      redirect: 'Redirect',
+      alwaysShow: true,
+      meta: {
+        title: '分类管理',
+        icon: 'settings'
+      },
+      children: [{
+          path: 'giftClassify',
+          name: 'giftClassify',
+          component: () =>
+            import('@/views/classifyManage/giftClassify'),
+          meta: {
+            title: '礼品分类',
+            icon: 'group'
+          }
+        },
+      ]
+    },
+    {
       path: '/activityManage',
       component: Layout,
       redirect: 'Redirect',

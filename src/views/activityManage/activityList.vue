@@ -189,7 +189,6 @@ export default {
         getActivity(){
             getActivityList({app:""}).then(({data})=>{
                 if(data.status == 0){
-                    console.log(data)
                     this.activityList = data.msg
                 }else{
                     return false;
@@ -227,6 +226,7 @@ export default {
                 type: "warning"
             }).then(() => {
                 const ids = this.multipleSelection.map(item => item.id).join(",");
+                console.log(ids)
                 deleteActivity({ ids: ids, method: "delete" }).then(({ data }) => {
                     if (data.status === 0) {
                         this.getActivity();
