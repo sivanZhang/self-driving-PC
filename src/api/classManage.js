@@ -16,6 +16,6 @@ export function delClass(data){
     return AXIOS.post('/categories/categories/?method=delete',data)
 }
 //编辑活动
-export function editClass(data){
+export function putClass(data){
     return AXIOS.post('/categories/categories/?method=put',data)
 }

@@ -1,0 +1,105 @@
+#giftClassify {
+    .nav-title {
+        padding: 8px 0;
+        .el-col {
+            color: #909399;
+        }
+    }
+    .search-group {
+        margin-bottom: 10px;
+    }
+    .t-header {
+        padding: 8px 12px;
+        margin-bottom: 10px;
+        background-color: #E4E7ED;
+    }
+    .el-main {
+        padding: 0;
+    }
+    .el-container {
+        min-height: calc(100vh - 50px);
+    }
+    .el-aside {
+        max-height: calc(100vh - 50px);
+        overflow-y: scroll;
+    }
+    .iconWarp {
+        display: none;
+        font-size: 12px;
+        &>* {
+            cursor: pointer;
+        }
+    }
+    .tag-nav {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+            background-color: #ebeef5;
+        }
+    }
+    .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .custom-tree-node {
+        &:hover {
+            .iconWarp {
+                display: inline-block;
+            }
+        }
+    }
+    .el-tree-node__content {
+        border-bottom: 1px solid #dfe6ec;
+        height: 35px;
+        font: 12px;
+      }
+    .rigth-giftList{
+        .el-card {
+          position: relative;
+          margin: 0 5px 12px -8px;
+          width: 220px;
+        }
+        .box-card-header {
+          position: relative;
+          height: 162px;
+          overflow: hidden;
+        }
+        .el-card__header {
+          padding: 0px 0px;
+        }
+      
+        p {
+          font-size: 12px;
+          color: #909399;
+          margin: 10px 0 5px;
+        }
+        .subtitle {
+          margin: 15px 0 5px;
+        }
+        .mini-image {
+          cursor: pointer;
+          overflow: hidden;
+          opacity: 1;
+        }
+        .image-slot {
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 56px;
+          background: #dcdfe6;
+        }
+        .dropdow {
+          position: absolute;
+          right: 15px;
+          top: 15px;
+          z-index: 3;
+        }
+    }
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
