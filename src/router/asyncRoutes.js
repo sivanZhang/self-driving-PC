@@ -157,6 +157,28 @@ export default function asyncRoutes(params) {
       ]
     },
     {
+      path: '/',
+      component: Layout,
+      redirect: 'noRedirect',
+      meta: {
+        breadcrumb: false,
+        title: '',
+        icon: 'gailan'
+      },
+      children: [ 
+        {
+          path: 'operateCenter',
+          name: 'operateCenter',
+          component: () =>
+            import('@/views/operateCenter'),
+          meta: {
+            title: '运营中心',
+            icon: 'group'
+          }
+        },
+      ]
+    },
+    {
       path: '/activityManage',
       component: Layout,
       redirect: 'Redirect',

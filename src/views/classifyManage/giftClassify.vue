@@ -1,5 +1,6 @@
 <template>
   <div id="giftClassify">
+    <!-- 礼品分类 -->
     <ElRow :gutter="24">
       <ElCol :span="6">
         <el-card>
