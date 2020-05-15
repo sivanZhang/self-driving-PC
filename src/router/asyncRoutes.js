@@ -201,6 +201,28 @@ export default function asyncRoutes(params) {
       ]
     },
     {
+      path: '/',
+      component: Layout,
+      redirect: 'noRedirect',
+      meta: {
+        breadcrumb: false,
+        title: '',
+        icon: 'logistic'
+      },
+      children: [ 
+        {
+          path: 'logisticManage',
+          name: 'logisticManage',
+          component: () =>
+            import('@/views/logisticManage'),
+          meta: {
+            title: '物流管理',
+            icon: 'logistic'
+          }
+        },
+      ]
+    },
+    {
       path: '/activityManage',
       component: Layout,
       redirect: 'Redirect',
