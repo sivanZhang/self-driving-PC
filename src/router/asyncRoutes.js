@@ -179,6 +179,28 @@ export default function asyncRoutes(params) {
       ]
     },
     {
+      path: '/',
+      component: Layout,
+      redirect: 'noRedirect',
+      meta: {
+        breadcrumb: false,
+        title: '',
+        icon: 'invoice'
+      },
+      children: [ 
+        {
+          path: 'invoiceManage',
+          name: 'invoiceManage',
+          component: () =>
+            import('@/views/invoiceManage'),
+          meta: {
+            title: '发票管理',
+            icon: 'invoice'
+          }
+        },
+      ]
+    },
+    {
       path: '/activityManage',
       component: Layout,
       redirect: 'Redirect',
