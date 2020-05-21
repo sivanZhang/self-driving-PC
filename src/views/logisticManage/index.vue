@@ -3,27 +3,31 @@
     <!-- 物流管理 -->
         <el-tabs v-model="activeName" @tab-click="handleClick">
             <el-tab-pane label="物流配送" name="first">
-              <logDelivery/>
+              <Logistics/>
             </el-tab-pane>
             <el-tab-pane label="门店自提" name="second">
               <store/>
             </el-tab-pane>
-            <el-tab-pane label="本地配送" name="third">本地配送</el-tab-pane>
+            <el-tab-pane label="本地配送" name="third">
+              <localDelivery/>
+            </el-tab-pane>
             <el-tab-pane label="商家地址" name="fourth">商家地址</el-tab-pane>
         </el-tabs>
     </div>
 </template>
 <script>
-  import logDelivery from './components/logDelivery'
+  import Logistics from './components/Logistics'
   import store from './components/store'
+  import localDelivery from './components/localDelivery'
   export default {
     components:{
-      logDelivery,
-      store
+      Logistics,
+      store,
+      localDelivery
     },
     data() {
       return {
-        activeName: 'second'
+        activeName: 'first'
       };
     },
     methods: {

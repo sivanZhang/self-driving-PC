@@ -1,5 +1,5 @@
 <template>
-  <div id="logDelivery">
+  <div id="Logistics">
     <!-- 物流配送 -->
     <el-tabs v-model="firstActiveName" @tab-click="handleClick" type="border-card">
       <el-tab-pane label="物流配送" name="send">
@@ -164,7 +164,7 @@ import VDistpicker from 'v-distpicker'
 import { getToken } from "@/utils/auth";
 export default {
   data() {
-    name: "logDelivery";
+    name: "Logistics";
     return {
       firstActiveName: "send",
       comName:"",
@@ -282,7 +282,7 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-#logDelivery {
+#Logistics {
   .row-bg {
     padding-bottom: 10px;
   }

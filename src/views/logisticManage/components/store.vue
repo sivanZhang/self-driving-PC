@@ -14,7 +14,7 @@
           </el-col>
           <el-col :span="5" class="col-bg">
             联系电话：
-            <el-input style="width:170px" v-model="phone" @keyup.enter.native="search()"></el-input>
+            <el-input style="width:170px" v-model="phone" @keyup.enter.native="search()" oninput="value=value.replace(/[^\d.]/g,'')"></el-input>
           </el-col>
           <el-col :span="5" class="col-bg">
             创建时间：
