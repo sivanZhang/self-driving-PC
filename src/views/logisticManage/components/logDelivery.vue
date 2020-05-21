@@ -109,7 +109,7 @@
           <el-input v-model="infoForm.number" placeholder="请输入编号"></el-input>
         </el-form-item>
          <el-form-item label="排序" prop="content">
-          <el-input v-model="infoForm.sort" placeholder="请输入编号"></el-input>
+          <el-input v-model="infoForm.sort" placeholder="请输入排序" oninput="value=value.replace(/[^\d.]/g,'')"></el-input>
         </el-form-item>
         <el-form-item label="封面">
             <el-upload
@@ -133,7 +133,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="联系电话" prop="content">
-          <el-input v-model="infoForm.phone" placeholder="请输入编号"></el-input>
+          <el-input v-model="infoForm.phone" placeholder="请输入联系电话" oninput="value=value.replace(/[^\d.]/g,'')"></el-input>
         </el-form-item>
         <el-form-item label="默认" prop="url">
           <el-radio v-model="infoForm.default" label="Yes">是</el-radio>
@@ -239,6 +239,9 @@ export default {
     },
     delRecord(){
       console.log("删除")
+    },
+    putRecord(){
+      console.log("修改")
     },
     change(){
       this.disabled = !this.disabled
