@@ -11,7 +11,9 @@
             <el-tab-pane label="本地配送" name="third">
               <localDelivery/>
             </el-tab-pane>
-            <el-tab-pane label="商家地址" name="fourth">商家地址</el-tab-pane>
+            <el-tab-pane label="商家地址" name="fourth">
+              <businessAdd/>
+            </el-tab-pane>
         </el-tabs>
     </div>
 </template>
@@ -19,11 +21,13 @@
   import Logistics from './components/Logistics'
   import store from './components/store'
   import localDelivery from './components/localDelivery'
+  import businessAdd from './components/businessAdd'
   export default {
     components:{
       Logistics,
       store,
-      localDelivery
+      localDelivery,
+      businessAdd
     },
     data() {
       return {
