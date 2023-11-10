@@ -16,7 +16,7 @@
     "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml"
   },
   "dependencies": {
-    "axios": "0.19.0",
+    "axios": "1.6.0",
     "babel-plugin-import": "^1.12.2",
     "canvas-arrow": "^1.1.1",
     "dayjs": "^1.8.16",
